@@ -1,0 +1,48 @@
+# Launch using distrobox to mount home/integrate desktop.
+# $ SHELL=/usr/bin/zsh distrobox create -n HelloFedora
+
+FROM fedora:latest
+RUN sudo dnf -y update
+
+# zsh (z shell) is an extended version of the Bourne Shell (sh).
+# @see https://zsh.sourceforge.io/Guide/zshguide.html
+RUN sudo dnf -y install zsh
+
+# tmux is a terminal multiplexer.
+# @see https://github.com/tmux/tmux/wiki
+RUN sudo dnf -y install tmux
+
+# git is a FOSS distributed version control system.
+# @see https://git-scm.com/
+RUN sudo dnf -y install git
+
+# fd is a simple, fast and user-friendly alternative to find. 
+# @see https://github.com/sharkdp/fd
+RUN sudo dnf -y install fd-find
+
+# rg is a line-oriented search tool that recursively searches the current directory for a regex pattern.
+# @see https://github.com/BurntSushi/ripgrep
+RUN sudo dnf -y install ripgrep
+
+# fzf is a general-purpose command-line fuzzy finder.
+# @see https://github.com/junegunn/fzf
+RUN sudo dnf -y install fzf
+
+# zoxide is a smarter cd command, inspired by z and autojump.
+# @see https://github.com/ajeetdsouza/zoxide
+RUN sudo dnf -y install zoxide  
+
+# lazygit is a simple terminal UI for git commands
+# @see https://github.com/jesseduffield/lazygit
+RUN sudo dnf -y install dnf-plugins-core 
+RUN sudo dnf -y copr enable atim/lazygit
+RUN sudo dnf -y install lazygit
+
+# neovim is a modern and powerful text editor that is fully compatible with Vim.
+# @see https://github.com/neovim/neovim
+RUN sudo dnf -y install neovim
+
+# LazyVim is a Neovim IDE powered by lazy.vim.
+# @see https://www.lazyvim.org/
+RUN sudo dnf -y install fontawesome-fonts
+RUN sudo dnf -y install gcc-c++
