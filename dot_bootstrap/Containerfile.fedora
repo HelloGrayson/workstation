@@ -51,3 +51,4 @@ RUN sudo dnf -y install neovim
 # @see https://www.lazyvim.org/
 RUN sudo dnf -y install fontawesome-fonts
 RUN sudo dnf -y install gcc-c++
+RUN sudo dnf -y install nodejs
