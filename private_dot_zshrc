@@ -130,6 +130,6 @@ unset key
 
 # Created by newuser for 5.9
 eval "$(zoxide init zsh)"
-alias vim="nvim --clean"
-export EDITOR=nvim
+alias vim='nvim --clean'
+export EDITOR='nvim --clean'
 export GPG_TTY=$(tty)
