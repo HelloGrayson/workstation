@@ -133,3 +133,6 @@ eval "$(zoxide init zsh)"
 alias vim='nvim --clean'
 export EDITOR='nvim --clean'
 export GPG_TTY=$(tty)
+
+# Add Golang bins to path
+export PATH=$HOME/go/bin:$PATH
