@@ -29,7 +29,7 @@ zmodule git-info
 # Formats the path to the current working directory to be used by prompts.
 zmodule prompt-pwd
 # Theme
-zmodule minimal
+zmodule sorin
 # Vi mode
 zmodule jeffreytse/zsh-vi-mode
 
