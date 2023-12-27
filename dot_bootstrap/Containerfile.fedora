@@ -28,6 +28,10 @@ RUN sudo dnf -y install ripgrep
 # @see https://github.com/junegunn/fzf
 RUN sudo dnf -y install fzf
 
+# ranger is a console file manager with VI key bindings.
+# @see https://github.com/ranger/ranger
+RUN sudo dnf -y install ranger
+
 # zoxide is a smarter cd command, inspired by z and autojump.
 # @see https://github.com/ajeetdsouza/zoxide
 RUN sudo dnf -y install zoxide  
