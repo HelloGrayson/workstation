@@ -1,5 +1,3 @@
-# Launch using distrobox to mount home/integrate desktop.
-# $ SHELL=/usr/bin/zsh distrobox create -n HelloFedora
 FROM quay.io/toolbx-images/fedora-toolbox:39
 RUN sudo dnf -y update
 
