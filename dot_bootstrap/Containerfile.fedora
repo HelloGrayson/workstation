@@ -1,7 +1,6 @@
 # Launch using distrobox to mount home/integrate desktop.
 # $ SHELL=/usr/bin/zsh distrobox create -n HelloFedora
-
-FROM fedora:latest
+FROM quay.io/toolbx-images/fedora-toolbox:40
 RUN sudo dnf -y update
 
 # zsh (z shell) is an extended version of the Bourne Shell (sh).
