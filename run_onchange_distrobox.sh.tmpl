@@ -2,10 +2,10 @@
 
 # .bootstrap/Containerfile.fedora hash: {{ include "dot_bootstrap/Containerfile.fedora" | sha256sum }}
 
-# Build/update local/hellofedora container.
+# Update localhost/fedora container.
 podman build -f {{ joinPath .chezmoi.sourceDir "dot_bootstrap/Containerfile.fedora" | quote }} -t "localhost/fedora"
 
-# Create/recreate HelloFedora distrobox.
+# Recreate Fedora distrobox.
 exists=$(distrobox ls | grep Fedora)
 echo $exists
 if [[ ! -z $exists ]]; then
