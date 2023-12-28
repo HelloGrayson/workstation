@@ -5,6 +5,14 @@ Automatically setup @HelloGrayson's Fedora Silverblue machine by running:
 ```console
 sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply HelloGrayson
 ```
+
+To setup these files for development, run:
+
+```
+$ curl -fsLS get.chezmoi.io
+$ chezmoi init git@github.com:HelloGrayson/dotfiles.git
+```
+
 ## References
 
 Using Ansible to drive system state via Chezmoi:
