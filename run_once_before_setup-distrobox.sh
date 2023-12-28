@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Install distrobox onto Silverblue host.
-if [[ ! -e $(which distrobox) ]]; then
+if ! command -v distrobox &>/dev/null; then
 	rpm-ostree install --assumeyes --apply-live distrobox
 fi
 
