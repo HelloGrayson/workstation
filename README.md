@@ -3,9 +3,11 @@
 Automatically setup @HelloGrayson's Fedora Silverblue machine.
 
 ## How to run
-```
-$ export GITHUB_USERNAME=HelloGrayson
-$ sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply $GITHUB_USERNAME
+
+No need to check this repo out, just open the terminal and run:
+
+```console
+sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply HelloGrayson
 ```
 ## References
 
