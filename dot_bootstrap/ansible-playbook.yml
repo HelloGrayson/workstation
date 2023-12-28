@@ -12,3 +12,17 @@
     - name: Get my user
       ansible.builtin.set_fact:
         remote_regular_user: "{{ ansible_env.SUDO_USER or ansible_user_id }}"
+
+    - name: Add Flathub as Flatpak remote
+      community.general.flatpak_remote:
+        name: flathub
+        state: present
+        method: user
+        flatpakrepo_url: "https://dl.flathub.org/repo/flathub.flatpakrepo"
+
+    - name: Install Spotify
+      community.general.flatpak:
+        name: "com.spotify.Client"
+        state: present
+        method: user
+        remote: flathub
