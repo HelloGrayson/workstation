@@ -16,6 +16,14 @@ RUN sudo dnf -y install tmux
 # @see https://git-scm.com/
 RUN sudo dnf -y install git
 
+# htop is a cross-platform interactive process viewer.
+# @see https://github.com/htop-dev/htop
+RUN sudo dnf -y install htop
+
+# fastfetch is like neofetch, but much faster because written mostly in C. 
+# @see https://github.com/fastfetch-cli/fastfetch
+RUN sudo dnf -y install fastfetch
+
 # fd is a simple, fast and user-friendly alternative to find. 
 # @see https://github.com/sharkdp/fd
 RUN sudo dnf -y install fd-find
