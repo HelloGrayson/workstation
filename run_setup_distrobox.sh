@@ -1,16 +1,17 @@
 #!/bin/bash
 
 # Build/update local/hellofedora container.
-podman build -f ~/.bootstrap/Containerfile.fedora -t hellofedora
+podman build -f ~/.bootstrap/Containerfile.fedora -t "localhost/fedora"
 
 # Create/recreate HelloFedora distrobox.
-exists=$(distrobox ls | grep HelloFedora)
+exists=$(distrobox ls | grep Fedora)
 echo $exists
-if [[ -z $exists ]] then
-    echo "HelloFedora distrobox doesn't exist yet."
+if [[ -z $exists ]]; then
+	echo "Fedora distrobox doesn't exist yet."
 else
-    distrobox stop -Y HelloFedora
-    distrobox rm -Y HelloFedora
+	distrobox stop -Y Fedora
+	distrobox rm -Y Fedora
 fi
-SHELL=/usr/bin/zsh distrobox create --image localhost/hellofedora --name HelloFedora
-distrobox upgrade HelloFedora # force init container
+SHELL=/usr/bin/zsh distrobox create --image localhost/fedora --name Fedora
+distrobox upgrade Fedora # force init container
+
