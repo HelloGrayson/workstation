@@ -1,17 +1,16 @@
 #!/bin/bash
 
+# .bootstrap/Containerfile.fedora hash: {{ include "dot_bootstrap/Containerfile.fedora" | sha256sum }}
+
 # Build/update local/hellofedora container.
-podman build -f ~/.bootstrap/Containerfile.fedora -t "localhost/fedora"
+podman build -f {{ joinPath .chezmoi.sourceDir "dot_bootstrap/Containerfile.fedora" | quote }} -t "localhost/fedora"
 
 # Create/recreate HelloFedora distrobox.
 exists=$(distrobox ls | grep Fedora)
 echo $exists
-if [[ -z $exists ]]; then
-	echo "Fedora distrobox doesn't exist yet."
-else
+if [[ ! -z $exists ]]; then
 	distrobox stop -Y Fedora
 	distrobox rm -Y Fedora
 fi
 SHELL=/usr/bin/zsh distrobox create --image localhost/fedora --name Fedora
 distrobox upgrade Fedora # force init container
-

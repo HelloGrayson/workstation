@@ -19,6 +19,10 @@ RUN sudo dnf -y install git
 # @see https://github.com/htop-dev/htop
 RUN sudo dnf -y install htop
 
+# ncdu is a disk usage analyzer with an ncurses interface.
+# @see https://dev.yorhel.nl/ncdu
+RUN sudo dnf -y install ncdu
+
 # fastfetch is like neofetch, but much faster because written mostly in C. 
 # @see https://github.com/fastfetch-cli/fastfetch
 RUN sudo dnf -y install fastfetch
