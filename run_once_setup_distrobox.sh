@@ -1,7 +1,9 @@
 #!/bin/bash
 
-# Layer distrobox into Silverblue host.
-rpm-ostree install --assumeyes --apply-live distrobox
+# Install distrobox onto Silverblue host.
+if [[ ! -e $(which distrobox) ]]; then
+	rpm-ostree install --assumeyes --apply-live distrobox
+fi
 
 # Build localhost/fedora container.
 podman build -f ~/.bootstrap/Containerfile.fedora -t "localhost/fedora"
