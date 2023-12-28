@@ -1,4 +1,4 @@
-FROM quay.io/toolbx-images/fedora-toolbox:39
+FROM registry.fedoraproject.org/fedora-toolbox:39
 RUN sudo dnf -y update
 
 # zsh (z shell) is an extended version of the Bourne Shell (sh).
