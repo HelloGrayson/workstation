@@ -19,3 +19,6 @@ Using Ansible to drive system state via Chezmoi:
 Using distrobox/toolbx with custom images:
 - https://youtu.be/7-FPAWjROos
 - https://github.com/ublue-os/boxkit
+
+Using Ansible to provision SilverBlue host.
+- https://github.com/j1mc/ansible-silverblue
