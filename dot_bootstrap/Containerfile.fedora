@@ -58,6 +58,5 @@ RUN sudo dnf -y install neovim
 
 # LazyVim is a Neovim IDE powered by lazy.vim.
 # @see https://www.lazyvim.org/
-RUN sudo dnf -y install fontawesome-fonts
 RUN sudo dnf -y install gcc-c++
 RUN sudo dnf -y install nodejs
