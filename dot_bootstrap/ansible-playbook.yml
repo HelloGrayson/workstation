@@ -10,15 +10,11 @@
 
   tasks:
     - name: Add Flathub as Flatpak remote
-      community.general.flatpak_remote:
+      flatpak_remote:
         name: flathub
-        state: present
-        method: user
         flatpakrepo_url: "https://dl.flathub.org/repo/flathub.flatpakrepo"
 
     - name: Install Gear Lever
-      community.general.flatpak:
+      flatpak:
         name: "it.mijorus.gearlever"
-        state: present
-        method: user
         remote: flathub
