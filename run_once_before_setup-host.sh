@@ -7,5 +7,5 @@ fi
 
 # Install ansible if not already.
 if ! command -v ansible &>/dev/null; then
-	pip install ansible
+	rpm-ostree install --assumeyes --apply-live ansible
 fi
