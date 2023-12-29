@@ -20,9 +20,9 @@
         method: user
         flatpakrepo_url: "https://dl.flathub.org/repo/flathub.flatpakrepo"
 
-    - name: Install Spotify
+    - name: Install Gear Lever
       community.general.flatpak:
-        name: "com.spotify.Client"
+        name: "it.mijorus.gearlever"
         state: present
         method: user
         remote: flathub
