@@ -1,12 +1,7 @@
 ---
 - name: Machine setup
   hosts: localhost
-  become: true
   connection: local
-  gather_facts: true
-  vars:
-    flyctl_version: "0.1.130"
-    pulumi_version: "v3.94.2"
 
   tasks:
     - name: Add Flathub as Flatpak remote

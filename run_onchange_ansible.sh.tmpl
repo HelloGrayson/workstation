@@ -2,4 +2,4 @@
 
 # .bootstrap/ansible-playbook.yml hash: {{ include "dot_bootstrap/ansible-playbook.yml" | sha256sum }}
 
-ansible-playbook {{ joinPath .chezmoi.sourceDir "dot_bootstrap/ansible-playbook.yml" | quote }} --ask-become-pass
+ansible-playbook {{ joinPath .chezmoi.sourceDir "dot_bootstrap/ansible-playbook.yml" | quote }}
