@@ -44,11 +44,11 @@ RUN env CGO_ENABLED=0 go install -ldflags="-s -w" github.com/gokcehan/lf@latest
 
 # zoxide is a smarter cd command, inspired by z and autojump.
 # @see https://github.com/ajeetdsouza/zoxide
-RUN sudo dnf -y install zoxide  
+RUN sudo dnf -y install zoxide
 
 # lazygit is a simple terminal UI for git commands
 # @see https://github.com/jesseduffield/lazygit
-RUN sudo dnf -y install dnf-plugins-core 
+RUN sudo dnf -y install dnf-plugins-core
 RUN sudo dnf -y copr enable atim/lazygit
 RUN sudo dnf -y install lazygit
 
