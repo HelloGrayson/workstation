@@ -2,9 +2,7 @@
 
 # Install ansible if not already.
 if ! command -v ansible &>/dev/null; then
-	echo "Installing ansible..."
 	pip install ansible
-	ansible --version
 fi
 
 # Run local playbook
