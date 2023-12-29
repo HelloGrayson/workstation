@@ -1,9 +1,0 @@
-#!/bin/bash
-
-# Install ansible if not already.
-if ! command -v ansible &>/dev/null; then
-	pip install ansible
-fi
-
-# Run local playbook
-ansible-playbook {{ joinPath .chezmoi.sourceDir "dot_bootstrap/ansible-playbook.yml" | quote }} --ask-become-pass
