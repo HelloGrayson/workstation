@@ -20,9 +20,30 @@
         name: flathub
         flatpakrepo_url: "https://dl.flathub.org/repo/flathub.flatpakrepo"
 
+    # Flatseal - Review and modify permissions from your Flatpak applications.
+    # @see https://flathub.org/apps/com.github.tchx84.Flatseal
+    - name: Install Flatseal
+      flatpak:
+        name: "com.github.tchx84.Flatseal"
+        remote: flathub
+
+    # Dconf Editor - A graphical tool for editing the dconf database.
+    # @see https://flathub.org/apps/ca.desrt.dconf-editor
+    - name: Dconf Editor
+      flatpak:
+        name: "ca.desrt.dconf-editor"
+        remote: flathub
+
     # Gear Lever - Manage AppImages with ease.
     # @see https://flathub.org/apps/it.mijorus.gearlever
     - name: Install Gear Lever
       flatpak:
         name: "it.mijorus.gearlever"
+        remote: flathub
+    
+    # Librewolf - Privacy and user freedom fork of Firefox.
+    # @see https://flathub.org/apps/io.gitlab.librewolf-community
+    - name: Install LibreWolf
+      flatpak:
+        name: "io.gitlab.librewolf-community"
         remote: flathub
