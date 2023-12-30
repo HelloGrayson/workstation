@@ -14,3 +14,11 @@ fi
 if ! command -v ansible &>/dev/null; then
 	rpm-ostree install --assumeyes --apply-live ansible
 fi
+
+# Setup Gnome Extension: AppIndicator and KStatusNotifierItem
+# @see https://extensions.gnome.org/extension/615/appindicator-support/
+#
+if ! $(gnome-extensions info appindicatorsupport@rgcjonas.gmail.com); then
+	rpm-ostree install --assumeyes --apply-live gnome-shell-extension-appindicator
+	gnome-extensions enable appindicatorsupport@rgcjonas.gmail.com
+fi
