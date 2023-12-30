@@ -1,4 +1,8 @@
 #!/bin/bash
+#
+# To save current Gnome settings, open the terminal and run:
+# $ chezmoi cd && rm -f dot_bootstrap/dconf.ini && dconf dump / > dot_bootstrap/dconf.ini
+#
 
 # .bootstrap/Containerfile.fedora hash: {{ include "dot_bootstrap/dconf.ini" | sha256sum }}
 
