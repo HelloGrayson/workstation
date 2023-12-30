@@ -4,17 +4,6 @@
   connection: local
 
   tasks:
-
-    - name: Set Gnome to dark mode.
-      dconf:
-        key: "/org/gnome/desktop/interface/color-scheme"
-        value: "'prefer-dark'"
-
-    - name: Set Gnome background image.
-      dconf:
-        key: "/org/gnome/desktop/background/picture-uri-dark"
-        value: "'file:///usr/share/backgrounds/gnome/blobs-d.svg'"
-
     - name: Add Flathub as Flatpak remote
       flatpak_remote:
         name: flathub
@@ -25,13 +14,6 @@
     - name: Install Flatseal
       flatpak:
         name: "com.github.tchx84.Flatseal"
-        remote: flathub
-
-    # Dconf Editor - A graphical tool for editing the dconf database.
-    # @see https://flathub.org/apps/ca.desrt.dconf-editor
-    - name: Dconf Editor
-      flatpak:
-        name: "ca.desrt.dconf-editor"
         remote: flathub
 
     # Gear Lever - Manage AppImages with ease.
