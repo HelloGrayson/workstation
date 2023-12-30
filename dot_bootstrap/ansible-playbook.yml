@@ -29,3 +29,52 @@
       flatpak:
         name: "io.gitlab.librewolf-community"
         remote: flathub
+
+    # Ungoogled Chromium - A drop-in replacement for Chromium without Google web services.
+    # @see https://flathub.org/apps/com.github.Eloston.UngoogledChromium
+    - name: Install Ungoogled Chromium
+      flatpak:
+        name: "com.github.Eloston.UngoogledChromium"
+        remote: flathub
+
+    # Tor Browser Launcher - Manage Tor Browser easily on GNU/Linux.
+    # @see https://flathub.org/apps/com.github.micahflee.torbrowser-launcher
+    - name: Install Tor Browser Launcher
+      flatpak:
+        name: "com.github.micahflee.torbrowser-launcher"
+        remote: flathub
+
+    # Blanket - Whitenoise generator to improve focus and increase productivity.
+    # @see https://flathub.org/apps/com.rafaelmardojai.Blanket
+    - name: Install Blanket
+      flatpak:
+        name: "com.rafaelmardojai.Blanket"
+        remote: "flathub"
+
+    # Spotify - Music streaming
+    # @see https://flathub.org/apps/com.spotify.Client
+    - name: Install Spotify
+      flatpak:
+        name: "com.spotify.Client"
+        remote: "flathub"
+
+    # FreeTube - OSS TouTube client focused on privacy and freedom.
+    # @see https://flathub.org/apps/io.freetubeapp.FreeTube
+    - name: Install FreeTube
+      flatpak:
+        name: "io.freetubeapp.FreeTube"
+        remote: "flathub"
+
+    # NewsFlash - Native RSS client
+    # @see https://flathub.org/apps/io.gitlab.news_flash.NewsFlash
+    - name: Install NewsFlash
+      flatpak:
+        name: "io.gitlab.news_flash.NewsFlash"
+        remote: "flathub"
+
+    # Telegram Desktop -  Use Telegram on Linux.
+    # @see https://flathub.org/apps/org.telegram.desktop
+    - name: Install Telegram Desktop
+      flatpak:
+        name: "org.telegram.desktop"
+        remote: "flathub"
