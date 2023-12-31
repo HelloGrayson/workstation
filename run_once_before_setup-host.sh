@@ -27,7 +27,7 @@ if ! command -v mullvad &>/dev/null; then
 	wget https://repository.mullvad.net/rpm/mullvad-keyring.asc
 	sudo install -o 0 -g 0 -m644 mullvad-keyring.asc /etc/pki/rpm-gpg/mullvad-keyring.asc
 	rpm-ostree install --assumeyes --apply-live mullvad-vpn
-	sudo systemctl enable --now mullvad-daemon # app available after reboot
+	sudo systemctl enable mullvad-daemon # app available after reboot
 fi
 
 # Install opensnitch if not already
@@ -41,5 +41,5 @@ if ! command -v opensnitchd &>/dev/null; then
 	wget https://github.com/evilsocket/opensnitch/releases/download/v1.6.2/opensnitch-1.6.2-1.x86_64.rpm
 	wget https://github.com/evilsocket/opensnitch/releases/download/v1.6.4/opensnitch-ui-1.6.4-1.noarch.rpm
 	rpm-ostree install --assumeyes --apply-live opensnitch-*.rpm
-	sudo systemctl enable --now opensnitch # app available after reboot
+	sudo systemctl enable opensnitch # app available after reboot
 fi
