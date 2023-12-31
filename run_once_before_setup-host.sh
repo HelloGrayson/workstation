@@ -27,4 +27,6 @@ if ! command -v mullvad &>/dev/null; then
 	wget https://repository.mullvad.net/rpm/mullvad-keyring.asc
 	sudo install -o 0 -g 0 -m644 mullvad-keyring.asc /etc/pki/rpm-gpg/mullvad-keyring.asc
 	rpm-ostree install --assumeyes --apply-live mullvad-vpn
+	systemctl enable --now mullvad-daemon
+	# the mullvad app will launch automatically on reboot
 fi
