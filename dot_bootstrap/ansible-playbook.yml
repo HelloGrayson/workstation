@@ -37,6 +37,13 @@
         name: "com.github.Eloston.UngoogledChromium"
         remote: flathub
 
+    # Mullvad Browser - A Tor-like browser for use with a VPN, instead of the Tor network.
+    # @see https://flathub.org/apps/net.mullvad.MullvadBrowser
+    - name: Install Mullvad Browser
+      flatpak:
+        name: "net.mullvad.MullvadBrowser"
+        remote: flathub
+
     # Tor Browser Launcher - Manage Tor Browser easily on GNU/Linux.
     # @see https://flathub.org/apps/com.github.micahflee.torbrowser-launcher
     - name: Install Tor Browser Launcher
