@@ -4,11 +4,6 @@
   connection: local
 
   tasks:
-    - name: Add Flathub as Flatpak remote
-      flatpak_remote:
-        name: flathub
-        flatpakrepo_url: "https://dl.flathub.org/repo/flathub.flatpakrepo"
-
     # Flatseal - Review and modify permissions from your Flatpak applications.
     # @see https://flathub.org/apps/com.github.tchx84.Flatseal
     - name: Install Flatseal
