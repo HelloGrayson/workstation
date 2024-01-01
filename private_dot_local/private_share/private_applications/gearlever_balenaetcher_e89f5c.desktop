@@ -1,8 +1,8 @@
 [Desktop Entry]
 Name=balenaEtcher
-Exec=~/AppImages/gearlever_balenaetcher_e89f5c.appimage --no-sandbox %U
-TryExec=~/AppImages/gearlever_balenaetcher_e89f5c.appimage
-Icon=~/AppImages/.icons/gearlever_balenaetcher_e89f5c
+Exec=/var/home/emerald/AppImages/gearlever_balenaetcher_e89f5c.appimage --no-sandbox %U
+TryExec=/var/home/emerald/AppImages/gearlever_balenaetcher_e89f5c.appimage
+Icon=/var/home/emerald/AppImages/.icons/gearlever_balenaetcher_e89f5c
 Terminal=false
 Type=Application
 
