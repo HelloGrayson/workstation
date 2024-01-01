@@ -1,0 +1,13 @@
+[Desktop Entry]
+Name=balenaEtcher
+Exec=/var/home/emerald/AppImages/gearlever_balenaetcher_e89f5c.appimage --no-sandbox %U
+TryExec=/var/home/emerald/AppImages/gearlever_balenaetcher_e89f5c.appimage
+Icon=/var/home/emerald/AppImages/.icons/gearlever_balenaetcher_e89f5c
+Terminal=false
+Type=Application
+
+StartupWMClass=balenaEtcher
+X-AppImage-Version=1.18.11
+Comment=Flash OS images to SD cards and USB drives, safely and easily.
+MimeType=x-scheme-handler/etcher;
+Categories=Utility;
