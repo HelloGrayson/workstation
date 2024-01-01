@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=System76 Keyboard Configurator
+Exec=/var/home/emerald/AppImages/gearlever_system76keyboardconfigurator_161104.appimage
+TryExec=/var/home/emerald/AppImages/gearlever_system76keyboardconfigurator_161104.appimage
+Icon=/var/home/emerald/AppImages/.icons/gearlever_system76keyboardconfigurator
+
+Type=Application
+StartupNotify=true
+Categories=Utility;
+
+X-AppImage-Version=161104
