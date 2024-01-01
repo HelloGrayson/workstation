@@ -15,6 +15,11 @@ if ! command -v ansible &>/dev/null; then
 	rpm-ostree install --assumeyes --apply-live ansible
 fi
 
+# Install age if not already.
+if ! command -v age &>/dev/null; then
+	rpm-ostree install --assumeyes --apply-live age
+fi
+
 # Install mullvad if not already.
 #
 # @see https://docs.fedoraproject.org/en-US/fedora-silverblue/troubleshooting/#_adding_external_package_repositories
