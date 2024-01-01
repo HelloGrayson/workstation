@@ -3,7 +3,7 @@
 # Wrap up host installation with items that ultimately require a system reboot.
 #
 
-# Mulvad - freedom and privacy-focused VPN.
+# Mullvad - freedom and privacy-focused VPN.
 #
 # @see https://mullvad.net/en/why-mullvad-vpn
 # @see https://mullvad.net/en/help/install-mullvad-app-linux#fedora
