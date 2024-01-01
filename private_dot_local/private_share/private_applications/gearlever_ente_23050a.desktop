@@ -1,9 +1,11 @@
 [Desktop Entry]
 Name=ente
-Exec=/var/home/emerald/AppImages/gearlever_ente_23050a.appimage
+Exec=/var/home/emerald/AppImages/gearlever_ente_23050a.appimage --no-sandbox %U
+TryExec=/var/home/emerald/AppImages/gearlever_ente_23050a.appimage
+Icon=/var/home/emerald/AppImages/.icons/gearlever_ente_23050a
 Terminal=false
 Type=Application
-Icon=/var/home/emerald/AppImages/.icons/gearlever_ente_23050a
+
 StartupWMClass=ente
 X-AppImage-Version=1.6.55
 Comment=Desktop client for ente.io
