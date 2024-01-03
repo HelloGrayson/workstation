@@ -1,3 +1,5 @@
+Pictures
+
 .var/app/io.freetubeapp.FreeTube
 .var/app/io.gitlab.librewolf-community
 .var/app/io.gitlab.news_flash.NewsFlash
