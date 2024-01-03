@@ -10,11 +10,6 @@ if ! command -v distrobox &>/dev/null; then
 	rpm-ostree install --assumeyes --apply-live distrobox
 fi
 
-# Install restic if not already.
-if ! command -v restic &>/dev/null; then
-	rpm-ostree install --assumeyes --apply-live restic
-fi
-
 # Install ansible if not already.
 if ! command -v ansible &>/dev/null; then
 	rpm-ostree install --assumeyes --apply-live ansible
