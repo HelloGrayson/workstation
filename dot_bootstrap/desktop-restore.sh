@@ -1,5 +1,7 @@
 #!/bin/bash
 
+cd $HOME
+
 # Connect to Backblaze
 source $HOME/.bootstrap/restic-env
 
