@@ -1,8 +1,15 @@
 #!/bin/bash
 
+# Update dconf database
+DCONF=$HOME/.bootstrap/dconf.ini
+rm -f $DCONF
+dconf dump / >$DCONF
+chezmoi add $DCONF
+
+# Backup to Backblaze
 cd $HOME
 
-# Connect to Backblaze
+# Init credentials
 source $HOME/.bootstrap/restic-env
 
 # Backup all files matching restic-includes.txt
