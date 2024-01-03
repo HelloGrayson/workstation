@@ -19,6 +19,10 @@ flatpak install --user --assumeyes flathub com.github.tchx84.Flatseal
 # @see https://flathub.org/apps/it.mijorus.gearlever
 flatpak install --user --assumeyes flathub it.mijorus.gearlever
 
+# Gnome Boxes - Easy Libvirt/QEMU VMs.
+# @see https://flathub.org/apps/org.gnome.Boxes
+flatpak install --user --assumeyes flathub org.gnome.Boxes
+
 # Librewolf - Privacy and user freedom fork of Firefox.
 # @see https://flathub.org/apps/io.gitlab.librewolf-community
 flatpak install --user --assumeyes flathub io.gitlab.librewolf-community
