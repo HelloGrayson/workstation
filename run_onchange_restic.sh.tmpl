@@ -1,0 +1,9 @@
+#!/bin/bash
+
+# when ready to make a snapshot:
+# restic backup --verbose --files-from=$HOME/whitelist.txt
+
+# .bootstrap/restic.txt hash: {{ include "dot_bootstrap/restic.txt" | sha256sum }}
+
+# restore everything in restic.txt
+restic restore --verbose --exclude user-dirs.dirs --target ~ latest
