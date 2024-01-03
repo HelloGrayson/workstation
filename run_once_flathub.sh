@@ -1,5 +1,7 @@
 #!/bin/bash
 
+flatpak remote-add --if-not-exists flathub "https://dl.flathub.org/repo/flathub.flatpakrepo"
+
 # Flatseal - Review and modify permissions from your Flatpak applications.
 # @see https://flathub.org/apps/com.github.tchx84.Flatseal
 flatpak install -y flathub com.github.tchx84.Flatseal
