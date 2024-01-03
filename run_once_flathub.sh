@@ -1,5 +1,14 @@
 #!/bin/bash
 
+# Silverblue pushes Linux towards a userspace fully-enclosed in $HOME.
+# All of our interactions with flatpak should specify --user to leave as
+# little trace in the host OS as possible and avoid the need for sudo.
+#
+# Unfortunately there is no way to change the default from --system to --user;
+# we must pass --user to every command.
+#
+# @see https://github.com/flatpak/flatpak/issues/4099
+#
 flatpak remote-add --user --if-not-exists flathub "https://dl.flathub.org/repo/flathub.flatpakrepo"
 
 # Flatseal - Review and modify permissions from your Flatpak applications.
