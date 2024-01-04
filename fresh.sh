@@ -55,12 +55,9 @@ if ! systemctl is-enabled systemd-timesyncd; then
 fi
 
 # Download and run Chezmoi
-sh -c "$(curl -fsLSk get.chezmoi.io)"
-if chezmoi init --verbose HelloGrayson; then
-  echo "Finalizing install..."
-  echo "REBOOT!"
-  #reboot
+if ! command -v chezmoi &>/dev/null; then
+  sh -c "$(curl -fsLSk get.chezmoi.io)"
 fi
+chezmoi init --apply --verbose HelloGrayson
 
-# If not rebooted, there was an error.
-echo "Chezmoi unsuccessful... debug and resolve."
+#reboot
