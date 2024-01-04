@@ -52,9 +52,10 @@ fi
 
 # Download and run Chezmoi
 sh -c "$(curl -fsLS get.chezmoi.io)"
-if chezmoi init --verbose git@github.com:HelloGrayson/dotfiles.git; then
+if chezmoi init --verbose HelloGrayson; then
   echo "Finalizing install..."
   reboot
 fi
 
-# If not rebooted, there was an error. Debug and resolve.
+# If not rebooted, there was an error.
+echo "Chezmoi unsuccessful... debug and resolve."
