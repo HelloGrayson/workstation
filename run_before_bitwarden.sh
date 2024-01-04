@@ -11,5 +11,5 @@ fi
 
 # Login if not already.
 if ! bw login --check; then
-	bw login
+	export BW_SESSION=$(bw login --raw)
 fi
