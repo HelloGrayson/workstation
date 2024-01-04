@@ -51,7 +51,10 @@ if ! systemctl is-enabled systemd-timesyncd; then
 fi
 
 # Download and run Chezmoi
-sh -c "$(curl -fsLSl get.chezmoi.io)" -- init --apply HelloGrayson
+sh -c "$(curl -fsLS get.chezmoi.io)"
+if chezmoi init --verbose git@github.com:HelloGrayson/dotfiles.git; then
+  echo "Finalizing install..."
+  reboot
+fi
 
-# Chezmoi is complete; reboot for fully-configured machine.
-reboot
+# If not rebooted, there was an error. Debug and resolve.
