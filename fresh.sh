@@ -14,10 +14,6 @@
 # Cheers.
 #
 
-# Establish sudo access (lasts 15 mins).
-echo "First run requires [sudo]..."
-sudo echo "Granted..."
-
 # Establish Bitwarden access.
 #
 # Setting $BW_SESSION within a chezmoi script
@@ -51,6 +47,9 @@ if ! bw unlock --check; then
   export BW_SESSION=$(bw unlock --raw)
 fi
 
+# Establish sudo access (lasts 15 mins).
+echo "First run requires [sudo]..."
+sudo echo "Granted..."
 
 # Enable timesyncd to ensure correct clock
 # Useful in the context of a VM snapshot
