@@ -11,6 +11,10 @@
 #
 flatpak remote-add --user --if-not-exists flathub "https://dl.flathub.org/repo/flathub.flatpakrepo"
 
+# Bitwarden - OSS secret storage as a service.
+# @see https://flathub.org/apps/com.bitwarden.desktop
+flatpak install --user --assumeyes flathub com.bitwarden.desktop
+
 # Flatseal - Review and modify permissions from your Flatpak applications.
 # @see https://flathub.org/apps/com.github.tchx84.Flatseal
 flatpak install --user --assumeyes flathub com.github.tchx84.Flatseal
