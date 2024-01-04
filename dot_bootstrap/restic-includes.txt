@@ -1,4 +1,4 @@
-./Pictures/
+./Pictures
 
 ./.var/app/io.freetubeapp.FreeTube
 ./.var/app/io.gitlab.librewolf-community

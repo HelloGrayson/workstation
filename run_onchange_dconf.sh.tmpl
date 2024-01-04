@@ -2,4 +2,4 @@
 
 # .bootstrap/Containerfile.fedora hash: {{ include "dot_bootstrap/dconf.ini" | sha256sum }}
 
-dconf load -f / < {{ joinPath .chezmoi.sourceDir "dot_bootstrap/dconf.ini" | quote }}
+# dconf load -f / < {{ joinPath .chezmoi.sourceDir "dot_bootstrap/dconf.ini" | quote }}
