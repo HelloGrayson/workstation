@@ -47,7 +47,6 @@ if ! bw unlock --check; then
   export BW_SESSION=$(bw unlock --raw)
 fi
 
-sudo -i -u emerald bash <<EOF
 # Enable timesyncd to ensure correct clock
 # Useful in the context of a VM snapshot
 # @see https://github.com/twpayne/chezmoi/issues/3453
@@ -86,7 +85,6 @@ if ! command -v opensnitchd &>/dev/null; then
 	rpm-ostree install --assumeyes --apply-live opensnitch-*.rpm
 	systemctl enable opensnitch # app available after reboot
 fi
-EOF
 
 
 # Download and run Chezmoi
