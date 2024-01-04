@@ -5,9 +5,11 @@
 # $ sh -c "$(curl -fsLS https://raw.githubusercontent.com/HelloGrayson/dotfiles/main/init.sh)"
 #
 # This works by:
-# 1. Installing Bitwarden and setting $BW_SESSION for Chezmoi program.
-# 2. Downloading Chezmoi, setting up this repo locally, and running.
-# 3. Rebooting machine to finalize installation.
+# 1. Initializing [sudo] in order to front-load credentialing.
+# 2. Installing Bitwarden, login, and auth to front-load credentialing.
+# 3. Install system level packages that require sudo.
+# 4. Download Chezmoi, download this repo, then provision system.
+# 5. Upgrade system packages, finalize install by rebooting.
 #
 # Cheers.
 #
@@ -41,9 +43,11 @@ if ! command -v bw &>/dev/null; then
 	chmod +x ~/bin/bw
 fi
 if ! bw login --check; then
+  echo "Logging into Bitwarden..."
 	export BW_SESSION=$(bw login --raw)
 fi
 if ! bw unlock --check; then
+  echo "Unlocking Bitwarden..."
   export BW_SESSION=$(bw unlock --raw)
 fi
 
