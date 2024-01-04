@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Install bw if not already.
+# Ensure Bitwarden CLI available.
 if ! command -v bw &>/dev/null; then
 	cd ~/Downloads/
 	wget --content-disposition "https://vault.bitwarden.com/download/?app=cli&platform=linux"
@@ -9,9 +9,12 @@ if ! command -v bw &>/dev/null; then
 	chmod +x ~/bin/bw
 fi
 
-# Login if not already.
+# Establish Bitwarden access.
 if ! bw login --check; then
 	export BW_SESSION=$(bw login --raw)
+fi
+if ! bw unlock --check; then
+	export BW_SESSION=$(bw unlock --raw)
 fi
 
 # Init sudo upfront if first ever run.
