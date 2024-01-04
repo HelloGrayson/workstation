@@ -11,6 +11,21 @@ if ! command -v bw &>/dev/null; then
 fi
 
 # Establish Bitwarden access.
+#
+# Setting $BW_SESSION within a chezmoi script
+# does not actually grant every chezmoi script
+# access to Bitwarden since environmental variables
+# do not survive between shell sessions that Chezmoi 
+# is presumably creating for each script.
+#
+# On a fresh machine, we can call into init.sh first and 
+# then call into out Chezmoi program from it, making init.sh
+# the parent script and allowing $BW_SESSION to be available 
+# until the entire program concludes.
+#
+# In short, this means we can auth to Bitwarden once for the 
+# entire installation without needing to reauthenticate.
+#
 if ! bw login --check; then
 	export BW_SESSION=$(bw login --raw)
 fi
