@@ -1,12 +1,5 @@
 #!/bin/sh
 
-# Enable timesyncd to ensure correct clock
-# Useful in the context of a VM snapshot
-# @see https://github.com/twpayne/chezmoi/issues/3453
-if ! systemctl is-enabled systemd-timesyncd; then
-	sudo systemctl enable --now systemd-timesyncd
-fi
-
 # Ensure Bitwarden CLI available.
 if ! command -v bw &>/dev/null; then
 	cd ~/Downloads/
@@ -27,6 +20,13 @@ fi
 
 # Establish sudo access (lasts 15 mins).
 sudo echo "First run..."
+
+# Enable timesyncd to ensure correct clock
+# Useful in the context of a VM snapshot
+# @see https://github.com/twpayne/chezmoi/issues/3453
+if ! systemctl is-enabled systemd-timesyncd; then
+	sudo systemctl enable --now systemd-timesyncd
+fi
 
 # Download and run Chezmoi
 sh -c "$(curl -fsLSl get.chezmoi.io)" -- init --apply HelloGrayson
