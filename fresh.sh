@@ -1,14 +1,16 @@
 #!/bin/sh
-
-# Ensure Bitwarden CLI available.
-if ! command -v bw &>/dev/null; then
-	cd ~/Downloads/
-	wget --content-disposition "https://vault.bitwarden.com/download/?app=cli&platform=linux"
-	unzip -u bw-linux-*.zip
-	mkdir -p ~/bin
-	mv bw ~/bin/
-	chmod +x ~/bin/bw
-fi
+#
+# Fully provision a fresh machine in a single command:
+#
+# $ sh -c "$(curl -fsLS https://raw.githubusercontent.com/HelloGrayson/dotfiles/main/init.sh)"
+#
+# This works by:
+# 1. Installing Bitwarden and setting $BW_SESSION for Chezmoi program.
+# 2. Downloading Chezmoi, setting up this repo locally, and running.
+# 3. Rebooting machine to finalize installation.
+#
+# Cheers.
+#
 
 # Establish Bitwarden access.
 #
@@ -26,11 +28,16 @@ fi
 # In short, this means we can auth to Bitwarden once for the 
 # entire installation without needing to reauthenticate.
 #
+if ! command -v bw &>/dev/null; then
+	cd ~/Downloads/
+	wget --content-disposition "https://vault.bitwarden.com/download/?app=cli&platform=linux"
+	unzip -u bw-linux-*.zip
+	mkdir -p ~/bin
+	mv bw ~/bin/
+	chmod +x ~/bin/bw
+fi
 if ! bw login --check; then
 	export BW_SESSION=$(bw login --raw)
-fi
-if ! bw unlock --check; then
-	export BW_SESSION=$(bw unlock --raw)
 fi
 
 # Establish sudo access (lasts 15 mins).
@@ -45,3 +52,6 @@ fi
 
 # Download and run Chezmoi
 sh -c "$(curl -fsLSl get.chezmoi.io)" -- init --apply HelloGrayson
+
+# Chezmoi is complete; reboot for fully-configured machine.
+reboot

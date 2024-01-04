@@ -3,7 +3,7 @@
 Automatically setup @HelloGrayson's Fedora Silverblue machine by running:
 
 ```console
-sh -c "$(curl -fsLSk https://raw.githubusercontent.com/HelloGrayson/dotfiles/main/init.sh)"
+sh -c "$(curl -fsLSk https://raw.githubusercontent.com/HelloGrayson/dotfiles/main/fresh.sh)"
 ```
 
 To setup these files for development, run:
