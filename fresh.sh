@@ -30,6 +30,7 @@
 # In short, this means we can auth to Bitwarden once for the
 # entire installation without needing to reauthenticate.
 #
+sudo -i -u emerald bash <<EOF
 if ! command -v bw &>/dev/null; then
 	cd ~/Downloads/
 	wget --content-disposition "https://vault.bitwarden.com/download/?app=cli&platform=linux"
@@ -47,13 +48,12 @@ if ! bw unlock --check; then
   export BW_SESSION=$(bw unlock --raw)
 fi
 
-sudo -i -u emerald bash <<EOF
 # Enable timesyncd to ensure correct clock
 # Useful in the context of a VM snapshot
 # @see https://github.com/twpayne/chezmoi/issues/3453
 if ! systemctl is-enabled systemd-timesyncd; then
-	systemctl enable --now systemd-timesyncd
-  systemctl start systemd-timesyncd
+	sudo systemctl enable --now systemd-timesyncd
+  sudo systemctl start systemd-timesyncd
 fi
 
 # Mullvad - freedom and privacy-focused VPN.
@@ -69,7 +69,7 @@ if ! command -v mullvad &>/dev/null; then
 	wget https://repository.mullvad.net/rpm/mullvad-keyring.asc
 	sudo install -o 0 -g 0 -m644 mullvad-keyring.asc /etc/pki/rpm-gpg/mullvad-keyring.asc
 	rpm-ostree install --assumeyes --apply-live mullvad-vpn
-	systemctl enable mullvad-daemon # app available after reboot
+	sudo systemctl enable mullvad-daemon # app available after reboot
 fi
 
 # OpenSnitch - GNU/Linux application firewall.
@@ -84,9 +84,8 @@ if ! command -v opensnitchd &>/dev/null; then
 	wget https://github.com/evilsocket/opensnitch/releases/download/v1.6.2/opensnitch-1.6.2-1.x86_64.rpm
 	wget https://github.com/evilsocket/opensnitch/releases/download/v1.6.4/opensnitch-ui-1.6.4-1.noarch.rpm
 	rpm-ostree install --assumeyes --apply-live opensnitch-*.rpm
-	systemctl enable opensnitch # app available after reboot
+	sudo systemctl enable opensnitch # app available after reboot
 fi
-EOF
 
 
 # Download and run Chezmoi
