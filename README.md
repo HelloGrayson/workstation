@@ -3,13 +3,13 @@
 Automatically setup @HelloGrayson's Fedora Silverblue machine by running:
 
 ```console
-sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply HelloGrayson
+sh -c "$(curl -fsLSlk get.chezmoi.io)" -- init --apply HelloGrayson
 ```
 
 To setup these files for development, run:
 
 ```
-$ curl -fsLS get.chezmoi.io
+$ curl -fsLSk get.chezmoi.io
 $ chezmoi init git@github.com:HelloGrayson/dotfiles.git
 ```
 
