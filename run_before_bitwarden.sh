@@ -13,3 +13,9 @@ fi
 if ! bw login --check; then
 	export BW_SESSION=$(bw login --raw)
 fi
+
+# Init sudo upfront if first ever run.
+# This will allow a fully unattended installation.
+if [ ! -d "$HOME/.bootstrap" ]; then
+	sudo echo "First run..."
+fi
