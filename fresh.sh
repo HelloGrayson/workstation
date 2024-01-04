@@ -13,6 +13,9 @@
 #
 # Cheers.
 #
+# Establish sudo access (lasts 15 mins).
+echo "First run requires [sudo]..."
+sudo --login
 
 # Establish Bitwarden access.
 #
@@ -46,10 +49,6 @@ if ! bw unlock --check; then
   echo "Unlocking Bitwarden..."
   export BW_SESSION=$(bw unlock --raw)
 fi
-
-# Establish sudo access (lasts 15 mins).
-echo "First run requires [sudo]..."
-sudo echo "Granted..."
 
 # Enable timesyncd to ensure correct clock
 # Useful in the context of a VM snapshot
