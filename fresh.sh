@@ -65,9 +65,9 @@ fi
 if ! command -v mullvad &>/dev/null; then
 	cd ~/Downloads/
 	wget https://repository.mullvad.net/rpm/stable/mullvad.repo
-	install -o 0 -g 0 -m644 mullvad.repo /etc/yum.repos.d/mullvad.repo
+	sudo install -o 0 -g 0 -m644 mullvad.repo /etc/yum.repos.d/mullvad.repo
 	wget https://repository.mullvad.net/rpm/mullvad-keyring.asc
-	install -o 0 -g 0 -m644 mullvad-keyring.asc /etc/pki/rpm-gpg/mullvad-keyring.asc
+	sudo install -o 0 -g 0 -m644 mullvad-keyring.asc /etc/pki/rpm-gpg/mullvad-keyring.asc
 	rpm-ostree install --assumeyes --apply-live mullvad-vpn
 	systemctl enable mullvad-daemon # app available after reboot
 fi
