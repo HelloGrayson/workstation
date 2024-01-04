@@ -26,9 +26,9 @@ chezmoi add $TRACKER
 MID=$(cat /etc/machine-id)
 HOST=$(fastfetch | grep "Host: ")
 OS=$(fastfetch | grep "OS: ")
-MASTER=$HOME/.bootstrap/restic-master
-rm -f $MASTER
-echo $MID >>$MASTER
-echo $HOST >>$MASTER
-echo $OS >>$MASTER
-chezmoi add $MASTER
+LEADER=$HOME/.bootstrap/restic-leader
+rm -f $LEADER
+echo $MID >>$LEADER
+echo $HOST >>$LEADER
+echo $OS >>$LEADER
+chezmoi add $LEADER

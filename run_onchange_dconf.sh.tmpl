@@ -3,8 +3,8 @@
 # .bootstrap/Containerfile.fedora hash: {{ include "dot_bootstrap/dconf.ini" | sha256sum }}
 
 # Restore current dconf if not the machine who performed a snapshot.
-MASTER=$(head -1 {{ joinPath .chezmoi.sourceDir "dot_bootstrap/restic-master" | quote }})
+LEADER=$(head -1 {{ joinPath .chezmoi.sourceDir "dot_bootstrap/restic-leader" | quote }})
 THIS=$(cat /etc/machine-id)
-if [ $THIS != $MASTER ]; then 
+if [ $THIS != $LEADER ]; then 
   dconf load -f / < {{ joinPath .chezmoi.sourceDir "dot_bootstrap/dconf.ini" | quote }}
 fi
