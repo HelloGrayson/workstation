@@ -39,6 +39,7 @@ fi
 if ! bw login --check; then
 	export BW_SESSION=$(bw login --raw)
 fi
+export BW_SESSION=$(bw unlock --raw)
 
 # Establish sudo access (lasts 15 mins).
 sudo echo "First run..."
