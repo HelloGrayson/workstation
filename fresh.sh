@@ -56,6 +56,7 @@ fi
 
 # Download and run Chezmoi
 if ! command -v chezmoi &>/dev/null; then
+  cd $HOME
   sh -c "$(curl -fsLSk get.chezmoi.io)"
 fi
 chezmoi init --apply --verbose HelloGrayson
