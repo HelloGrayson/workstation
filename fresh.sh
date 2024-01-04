@@ -19,18 +19,17 @@
 # Setting $BW_SESSION within a chezmoi script
 # does not actually grant every chezmoi script
 # access to Bitwarden since environmental variables
-# do not survive between shell sessions that Chezmoi
+# do not survive between shell sessions that Chezmoi 
 # is presumably creating for each script.
 #
-# On a fresh machine, we can call into init.sh first and
+# On a fresh machine, we can call into init.sh first and 
 # then call into out Chezmoi program from it, making init.sh
-# the parent script and allowing $BW_SESSION to be available
+# the parent script and allowing $BW_SESSION to be available 
 # until the entire program concludes.
 #
-# In short, this means we can auth to Bitwarden once for the
+# In short, this means we can auth to Bitwarden once for the 
 # entire installation without needing to reauthenticate.
 #
-sudo -i -u emerald bash <<EOF
 if ! command -v bw &>/dev/null; then
 	cd ~/Downloads/
 	wget --content-disposition "https://vault.bitwarden.com/download/?app=cli&platform=linux"
@@ -103,4 +102,3 @@ rpm-ostree upgrade
 # This is necessary for some components,
 # like Mullvad, opensnitch, and the Gnome AppIndicator extension.
 reboot
-EOF
