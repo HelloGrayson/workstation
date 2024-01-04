@@ -95,6 +95,10 @@ if ! command -v chezmoi &>/dev/null; then
 fi
 chezmoi init --apply --verbose HelloGrayson
 
+# Update system to latest packages,
+# taking advantage of following reboot
+rpm-ostree upgrade
+
 # Finalize installation by Rebooting
 # This is necessary for some components,
 # like Mullvad, opensnitch, and the Gnome AppIndicator extension.
