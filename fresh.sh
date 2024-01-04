@@ -13,9 +13,6 @@
 #
 # Cheers.
 #
-# Establish sudo access (lasts 15 mins).
-echo "First run requires [sudo]..."
-sudo --login
 
 # Establish Bitwarden access.
 #
