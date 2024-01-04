@@ -21,3 +21,14 @@ TRACKER=$HOME/.bootstrap/restic-latest
 rm -f $TRACKER
 echo $LATEST >>$TRACKER
 chezmoi add $TRACKER
+
+# Track which machine updated last
+MID=$(cat /etc/machine-id)
+HOST=$(fastfetch | grep "Host: ")
+OS=$(fastfetch | grep "OS: ")
+MASTER=$HOME/.bootstrap/restic-master
+rm -f $MASTER
+echo $MID >>$MASTER
+echo $HOST >>$MASTER
+echo $OS >>$MASTER
+chezmoi add $MASTER

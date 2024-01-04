@@ -2,4 +2,9 @@
 
 # .bootstrap/restic-latest hash: {{ include "dot_bootstrap/restic-latest" | sha256sum }}
 
-# bash {{ joinPath .chezmoi.sourceDir "dot_bootstrap/desktop-restore.sh" | quote }}
+# Restore current machine if not the last one who did a snapshot.
+MASTER=$(head -1 {{ joinPath .chezmoi.sourceDir "dot_bootstrap/restic-master" | quote }})
+THIS=$(cat /etc/machine-id)
+if [ $THIS != $MASTER ]; then 
+  bash {{ joinPath .chezmoi.sourceDir "dot_bootstrap/desktop-restore.sh" | quote }}
+fi
