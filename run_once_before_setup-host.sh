@@ -1,19 +1,9 @@
 #!/bin/bash
 
-# Install fastfetch if not already.
-if ! command -v fastfetch &>/dev/null; then
-	rpm-ostree install --assumeyes --apply-live fastfetch
-fi
-
-# Install distrobox if not already.
-if ! command -v distrobox &>/dev/null; then
-	rpm-ostree install --assumeyes --apply-live distrobox
-fi
-
-# Install restic if not already.
-if ! command -v restic &>/dev/null; then
-	rpm-ostree install --assumeyes --apply-live restic
-fi
+# Install preqequisites into a single rpm-ostree layer
+rpm-ostree install \
+	--assumeyes --apply-live --idempotent \
+	fastfetch distrobox restic
 
 # Install bw if not already.
 if ! command -v bw &>/dev/null; then
