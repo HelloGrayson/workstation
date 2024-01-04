@@ -39,7 +39,9 @@ fi
 if ! bw login --check; then
 	export BW_SESSION=$(bw login --raw)
 fi
-export BW_SESSION=$(bw unlock --raw)
+if ! bw unlock --check; then
+  export BW_SESSION=$(bw unlock --raw)
+fi
 
 # Establish sudo access (lasts 15 mins).
 sudo echo "First run..."
@@ -55,7 +57,8 @@ fi
 sh -c "$(curl -fsLS get.chezmoi.io)"
 if chezmoi init --verbose HelloGrayson; then
   echo "Finalizing install..."
-  reboot
+  echo "REBOOT!"
+  #reboot
 fi
 
 # If not rebooted, there was an error.
