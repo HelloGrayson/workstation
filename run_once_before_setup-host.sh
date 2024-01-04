@@ -1,5 +1,12 @@
 #!/bin/bash
 
+# Enable timesyncd to ensure correct clock
+# Useful in the context of a VM snapshot
+# @see https://github.com/twpayne/chezmoi/issues/3453
+if ! systemctl is-enabled systemd-timesyncd; then
+	sudo systemctl enable --now systemd-timesyncd
+fi
+
 # Install preqequisites into a single rpm-ostree layer
 rpm-ostree install \
 	--assumeyes --apply-live --idempotent \
