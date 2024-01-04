@@ -51,10 +51,11 @@ sudo echo "First run..."
 # @see https://github.com/twpayne/chezmoi/issues/3453
 if ! systemctl is-enabled systemd-timesyncd; then
 	sudo systemctl enable --now systemd-timesyncd
+  sudo systemctl start systemd-timesyncd
 fi
 
 # Download and run Chezmoi
-sh -c "$(curl -fsLS get.chezmoi.io)"
+sh -c "$(curl -fsLSk get.chezmoi.io)"
 if chezmoi init --verbose HelloGrayson; then
   echo "Finalizing install..."
   echo "REBOOT!"
