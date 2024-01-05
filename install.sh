@@ -123,4 +123,4 @@ rpm-ostree upgrade
 # Finalize installation by Rebooting
 # This is necessary for some components,
 # like Mullvad, opensnitch, and the Gnome AppIndicator extension.
-reboot
+# reboot
