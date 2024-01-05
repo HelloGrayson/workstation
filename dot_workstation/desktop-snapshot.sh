@@ -1,7 +1,8 @@
 #!/bin/bash
 set -x
 
-LEADER=$HOME/.bootstrap/restic-leader
+WORKSTATION=$HOME/.workstation
+LEADER=$WORKSTATION/restic-leader
 
 # Only allow snapshot from leader...
 # TODO create desktop-leader.sh which allows machine to set self as leader
@@ -12,7 +13,7 @@ if [ $(cat /etc/machine-id) != $(head -1 $LEADER) ]; then
 fi
 
 # Update dconf database
-DCONF=$HOME/.bootstrap/dconf.ini
+DCONF=$WORKSTATION/dconf.ini
 rm -f $DCONF
 dconf dump / >$DCONF
 
@@ -20,10 +21,10 @@ dconf dump / >$DCONF
 cd $HOME
 
 # Init credentials
-source $HOME/.bootstrap/restic-env
+source $WORKSTATION/restic-env
 
 # Backup all files matching restic-includes.txt
-restic backup --verbose --files-from=$HOME/.bootstrap/restic-includes.txt
+restic backup --verbose --files-from=$WORKSTATION/restic-includes.txt
 
 # Prune backups according to policy:
 #
@@ -41,7 +42,7 @@ restic stats
 
 # Store latest short_id in restic-latest
 LATEST=$(restic snapshots --json | jq .[-1].short_id -r)
-TRACKER=$HOME/.bootstrap/restic-latest
+TRACKER=$WORKSTATION/restic-latest
 rm -f $TRACKER
 echo $LATEST >>$TRACKER
 chezmoi add $TRACKER

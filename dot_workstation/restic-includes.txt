@@ -1,4 +1,4 @@
-./.bootstrap/dconf.ini
+./.workstation/dconf.ini
 ./.local/share/backgrounds
 
 ./.var/app/io.freetubeapp.FreeTube

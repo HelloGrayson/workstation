@@ -1,10 +1,10 @@
 #!/bin/bash
 set -x
 
-# .bootstrap/Containerfile.fedora hash: {{ include "dot_bootstrap/Containerfile.fedora" | sha256sum }}
+# .workstation/Containerfile.fedora hash: {{ include "dot_workstation/Containerfile.fedora" | sha256sum }}
 
 # Update localhost/fedora container.
-podman build -f {{ joinPath .chezmoi.sourceDir "dot_bootstrap/Containerfile.fedora" | quote }} -t "localhost/fedora"
+podman build -f {{ joinPath .chezmoi.sourceDir "dot_workstation/Containerfile.fedora" | quote }} -t "localhost/fedora"
 
 # Recreate Fedora distrobox.
 exists=$(distrobox ls | grep Fedora)
