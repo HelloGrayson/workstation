@@ -53,6 +53,13 @@ fi
 # This makes the entire install from the time sudo is entered unattended.
 sudo -i -u root bash <<EOF
 
+# Enable systemd user services to run on boot & when logged out.
+#
+# @see https://brandonrozek.com/blog/non-root-systemd-scripts/
+#
+loginctl enable-linger $USER # [sudo]
+loginctl show-user $USER # [sudo]
+
 # Enable timesync to ensure correct clock
 # 
 # @see https://github.com/twpayne/chezmoi/issues/3453
@@ -92,6 +99,7 @@ if ! command -v opensnitchd &>/dev/null; then
   rpm-ostree install --assumeyes --apply-live opensnitch-*.rpm
   systemctl enable opensnitch # app available after reboot # [sudo]
 fi
+
 EOF
 
 # Download and run Chezmoi
