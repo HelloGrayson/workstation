@@ -13,6 +13,12 @@
 # Cheers.
 #
 
+# Print all commands to terminal.
+#
+# @see https://www.baeldung.com/linux/set-command#4-the--x-option
+#
+set -x
+
 # Establish Bitwarden access.
 #
 # Setting $BW_SESSION within a chezmoi script
