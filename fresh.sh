@@ -60,6 +60,9 @@ fi
 cd ~/Downloads
 sudo bash <<EOF
 
+# Show user all commands being executed.
+set -x
+
 # Enable systemd user services to run on boot & when logged out.
 #
 # @see https://brandonrozek.com/blog/non-root-systemd-scripts/
