@@ -114,7 +114,7 @@ if ! command -v chezmoi &>/dev/null; then
   cd $HOME
   sh -c "$(curl -fsLSk get.chezmoi.io)"
 fi
-chezmoi init --apply --verbose HelloGrayson
+chezmoi init --apply --verbose HelloGrayson/workstation
 
 # Update system to latest packages,
 # taking advantage of following reboot
