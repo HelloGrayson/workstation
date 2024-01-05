@@ -1,4 +1,5 @@
 #!/bin/bash
+set -x
 
 # Silverblue pushes Linux towards a userspace fully-enclosed in $HOME.
 # All of our interactions with flatpak should specify --user to leave as

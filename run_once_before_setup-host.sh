@@ -1,4 +1,5 @@
 #!/bin/bash
+set -x
 
 # Install preqequisites into a single rpm-ostree layer
 rpm-ostree install \

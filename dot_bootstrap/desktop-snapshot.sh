@@ -1,4 +1,5 @@
 #!/bin/bash
+set -x
 
 LEADER=$HOME/.bootstrap/restic-leader
 

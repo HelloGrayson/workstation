@@ -1,4 +1,6 @@
 #!/bin/bash
+set -x
+
 # Install AppImages into Gearlever.
 # .desktop synced via ~/.local/applications w/ chezmoi.
 
