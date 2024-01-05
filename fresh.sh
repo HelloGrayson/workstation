@@ -5,11 +5,10 @@
 # $ sh -c "$(curl -fsLS https://raw.githubusercontent.com/HelloGrayson/dotfiles/main/init.sh)"
 #
 # This works by:
-# 1. Initializing [sudo] in order to front-load credentialing.
-# 2. Installing Bitwarden, login, and auth to front-load credentialing.
-# 3. Install system level packages that require sudo.
-# 4. Download Chezmoi, download this repo, then provision system.
-# 5. Upgrade system packages, finalize install by rebooting.
+# 1. Installing Bitwarden, login, and auth, setting $BW_SESSION.
+# 2. Provision host using a sudo block for all root-level setup.
+# 3. Download Chezmoi, download this repo, then provision system.
+# 4. Upgrade system packages, finalize install by rebooting.
 #
 # Cheers.
 #
