@@ -5,4 +5,4 @@ Requires=desktop-snapshot.service
 [Timer]
 Unit=desktop-snapshot.service
 OnBootSec=10min
-OnCalendar=weekly
+OnCalendar=daily

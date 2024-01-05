@@ -25,6 +25,20 @@ source $HOME/.bootstrap/restic-env
 # Backup all files matching restic-includes.txt
 restic backup --verbose --files-from=$HOME/.bootstrap/restic-includes.txt
 
+# Prune backups according to policy:
+#
+# @see https://restic.readthedocs.io/en/stable/060_forget.html#removing-snapshots-according-to-a-policy
+#
+# - Keep the last 7 daily snapshots.
+# - Keep 5 total snapshots for each of the last 5 weeks.
+# - Keep 12 total snapshots for each of thel last 12 months.
+# - Keep 60 total snapshots for each of the last 40 years.
+restic forget --prune --keep-daily 7 --keep-weekly 5 --keep-monthly 12 --keep-yearly 40
+
+# Display restic stats
+restic snapshots
+restic stats
+
 # Store latest short_id in restic-latest
 LATEST=$(restic snapshots --json | jq .[-1].short_id -r)
 TRACKER=$HOME/.bootstrap/restic-latest
