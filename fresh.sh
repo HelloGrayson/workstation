@@ -43,16 +43,13 @@ if ! command -v bw &>/dev/null; then
   mv bw ~/bin/
   chmod +x ~/bin/bw
 fi
-set +x
 if ! bw login --check; then
-  set +x;
   export BW_SESSION=$(bw login --raw)
 fi
 if ! bw unlock --check; then
   echo "Unlocking Bitwarden..."
   export BW_SESSION=$(bw unlock --raw)
 fi
-set -x
 
 # Perform sudo-required host provisioning. This approach 
 # allows many sudo-required commands to run while only prompting for a 
