@@ -5,3 +5,6 @@ Description=Periodic Desktop Snapshot
 Type=oneshot
 RemainAfterExit=yes
 ExecStart=bash /var/home/emerald/.bootstrap/desktop-snapshot.sh -v 2>&1 | logger
+
+[Install]
+WantedBy=multi-user.target

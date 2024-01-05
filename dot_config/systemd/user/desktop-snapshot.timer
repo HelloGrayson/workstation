@@ -5,4 +5,7 @@ Requires=desktop-snapshot.service
 [Timer]
 Unit=desktop-snapshot.service
 OnBootSec=10min
-OnCalendar=daily
+OnCalendar=weekly
+
+[Install]
+WantedBy=multi-user.target
