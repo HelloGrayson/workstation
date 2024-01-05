@@ -48,7 +48,9 @@ if ! bw unlock --check; then
 fi
 
 # Setup timesync, mullvad, and opensnitch.
-# Enter sudo only once by block running as root.
+# Enter sudo only once by running entire block as root.
+# Now the user no longer needs to enter sudo several times while bootstrapping.
+# This makes the entire install from the time sudo is entered unattended.
 sudo -i -u root bash <<EOF
 if ! systemctl is-enabled systemd-timesyncd; then
   systemctl enable systemd-timesyncd # [sudo]
