@@ -47,7 +47,6 @@ if ! bw login --check; then
   export BW_SESSION=$(bw login --raw)
 fi
 if ! bw unlock --check; then
-  echo "Unlocking Bitwarden..."
   export BW_SESSION=$(bw unlock --raw)
 fi
 
