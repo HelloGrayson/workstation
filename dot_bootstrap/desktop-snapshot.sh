@@ -14,7 +14,6 @@ fi
 DCONF=$HOME/.bootstrap/dconf.ini
 rm -f $DCONF
 dconf dump / >$DCONF
-chezmoi add $DCONF
 
 # Backup to Backblaze
 cd $HOME

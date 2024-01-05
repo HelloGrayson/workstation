@@ -6,6 +6,9 @@ systemctl --user daemon-reload
 # .config/systemd/user/desktop-snapshot.service hash: {{ include "dot_config/systemd/user/desktop-snapshot.service" | sha256sum }}
 # .config/systemd/user/desktop-snapshot.timer hash: {{ include "dot_config/systemd/user/desktop-snapshot.timer" | sha256sum }}
 
+if ! systemctl is-enabled --user desktop-snapshot.service; then
+  systemctl enable --user --now desktop-snapshot.service
+fi
 if ! systemctl is-enabled --user desktop-snapshot.timer; then
   systemctl enable --user --now desktop-snapshot.timer
 fi
