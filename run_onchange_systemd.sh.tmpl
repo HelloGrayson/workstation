@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# Reload daemon to pick up all file changes
+systemctl --user daemon-reload
+
+# .config/systemd/user/desktop-snapshot.service hash: {{ include "dot_config/systemd/user/desktop-snapshot.service" | sha256sum }}
+# .config/systemd/user/desktop-snapshot.timer hash: {{ include "dot_config/systemd/user/desktop-snapshot.timer" | sha256sum }}
+
+if ! systemctl is-enabled --user desktop-snapshot.timer; then
+  systemctl enable --user --now desktop-snapshot.timer
+fi
+if ! systemctl is-active --user desktop-snapshot.timer; then
+  systemctl start --user desktop-snapshot.timer
+fi
+systemctl status --user desktop-snapshot.timer

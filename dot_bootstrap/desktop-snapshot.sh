@@ -1,5 +1,15 @@
 #!/bin/bash
 
+LEADER=$HOME/.bootstrap/restic-leader
+
+# Only allow snapshot from leader...
+# TODO create desktop-leader.sh which allows machine to set self as leader
+# this would solve the issue of migrating to a new machine for primary use.
+if [ $(cat /etc/machine-id) != $(head -1 $LEADER) ]; then
+	echo "Not leader; gracefully exiting..."
+	exit 0
+fi
+
 # Update dconf database
 DCONF=$HOME/.bootstrap/dconf.ini
 rm -f $DCONF
@@ -22,11 +32,11 @@ rm -f $TRACKER
 echo $LATEST >>$TRACKER
 chezmoi add $TRACKER
 
-# Track which machine updated last
+# Recreate leader file to
+# track which machine did snapshot
 MID=$(cat /etc/machine-id)
 HOST=$(fastfetch | grep "Host: ")
 OS=$(fastfetch | grep "OS: ")
-LEADER=$HOME/.bootstrap/restic-leader
 rm -f $LEADER
 echo $MID >>$LEADER
 echo $HOST >>$LEADER
