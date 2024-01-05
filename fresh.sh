@@ -31,16 +31,16 @@
 # entire installation without needing to reauthenticate.
 #
 if ! command -v bw &>/dev/null; then
-	cd ~/Downloads/
-	wget --content-disposition "https://vault.bitwarden.com/download/?app=cli&platform=linux"
-	unzip -u bw-linux-*.zip
-	mkdir -p ~/bin
-	mv bw ~/bin/
-	chmod +x ~/bin/bw
+  cd ~/Downloads/
+  wget --content-disposition "https://vault.bitwarden.com/download/?app=cli&platform=linux"
+  unzip -u bw-linux-*.zip
+  mkdir -p ~/bin
+  mv bw ~/bin/
+  chmod +x ~/bin/bw
 fi
 if ! bw login --check; then
   echo "Logging into Bitwarden..."
-	export BW_SESSION=$(bw login --raw)
+  export BW_SESSION=$(bw login --raw)
 fi
 if ! bw unlock --check; then
   echo "Unlocking Bitwarden..."
@@ -48,26 +48,27 @@ if ! bw unlock --check; then
 fi
 
 # Setup timesync, mullvad, and opensnitch.
+# Enter sudo only once by block running as root.
 sudo -i -u root bash <<EOF
 if ! systemctl is-enabled systemd-timesyncd; then
-	systemctl enable --now systemd-timesyncd
-  systemctl start systemd-timesyncd
+  systemctl enable systemd-timesyncd # [sudo]
+  systemctl start systemd-timesyncd # [sudo]
 fi
 if ! command -v mullvad &>/dev/null; then
-	cd ~/Downloads/
-	wget https://repository.mullvad.net/rpm/stable/mullvad.repo
-	install -o 0 -g 0 -m644 mullvad.repo /etc/yum.repos.d/mullvad.repo
-	wget https://repository.mullvad.net/rpm/mullvad-keyring.asc
-	install -o 0 -g 0 -m644 mullvad-keyring.asc /etc/pki/rpm-gpg/mullvad-keyring.asc
-	rpm-ostree install --assumeyes --apply-live mullvad-vpn
-	systemctl enable mullvad-daemon # app available after reboot
+  cd ~/Downloads/
+  wget https://repository.mullvad.net/rpm/stable/mullvad.repo
+  install -o 0 -g 0 -m644 mullvad.repo /etc/yum.repos.d/mullvad.repo # [sudo]
+  wget https://repository.mullvad.net/rpm/mullvad-keyring.asc
+  install -o 0 -g 0 -m644 mullvad-keyring.asc /etc/pki/rpm-gpg/mullvad-keyring.asc # [sudo]
+  rpm-ostree install --assumeyes --apply-live mullvad-vpn
+  systemctl enable mullvad-daemon # app available after reboot # [sudo]
 fi
 if ! command -v opensnitchd &>/dev/null; then
-	cd ~/Downloads/
-	wget https://github.com/evilsocket/opensnitch/releases/download/v1.6.2/opensnitch-1.6.2-1.x86_64.rpm
-	wget https://github.com/evilsocket/opensnitch/releases/download/v1.6.4/opensnitch-ui-1.6.4-1.noarch.rpm
-	rpm-ostree install --assumeyes --apply-live opensnitch-*.rpm
-	systemctl enable opensnitch # app available after reboot
+  cd ~/Downloads/
+  wget https://github.com/evilsocket/opensnitch/releases/download/v1.6.2/opensnitch-1.6.2-1.x86_64.rpm
+  wget https://github.com/evilsocket/opensnitch/releases/download/v1.6.4/opensnitch-ui-1.6.4-1.noarch.rpm
+  rpm-ostree install --assumeyes --apply-live opensnitch-*.rpm
+  systemctl enable opensnitch # app available after reboot # [sudo]
 fi
 EOF
 
