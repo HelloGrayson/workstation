@@ -47,11 +47,13 @@ if ! bw unlock --check; then
   export BW_SESSION=$(bw unlock --raw)
 fi
 
-# Setup timesync, mullvad, and opensnitch.
-# Enter sudo only once by running entire block as root.
-# Now the user no longer needs to enter sudo several times while bootstrapping.
-# This makes the entire install from the time sudo is entered unattended.
-sudo -i -u root bash <<EOF
+# Perform sudo-required host provisioning. This approach 
+# allows many sudo-required commands to run while only prompting for a 
+# single sudo password; ideal for unattended and long-running installations.
+# 
+# @see https://superuser.com/a/1385156
+#
+sudo bash <<EOF
 
 # Enable systemd user services to run on boot & when logged out.
 #
