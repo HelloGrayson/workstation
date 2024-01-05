@@ -43,14 +43,16 @@ if ! command -v bw &>/dev/null; then
   mv bw ~/bin/
   chmod +x ~/bin/bw
 fi
+set +x
 if ! bw login --check; then
-  echo "Logging into Bitwarden..."
+  set +x;
   export BW_SESSION=$(bw login --raw)
 fi
 if ! bw unlock --check; then
   echo "Unlocking Bitwarden..."
   export BW_SESSION=$(bw unlock --raw)
 fi
+set -x
 
 # Perform sudo-required host provisioning. This approach 
 # allows many sudo-required commands to run while only prompting for a 
@@ -58,6 +60,7 @@ fi
 # 
 # @see https://superuser.com/a/1385156
 #
+cd ~/Downloads
 sudo bash <<EOF
 
 # Enable systemd user services to run on boot & when logged out.
@@ -83,7 +86,6 @@ fi
 # @see https://docs.fedoraproject.org/en-US/fedora-silverblue/troubleshooting/#_adding_external_package_repositories
 #
 if ! command -v mullvad &>/dev/null; then
-  cd ~/Downloads/
   wget https://repository.mullvad.net/rpm/stable/mullvad.repo
   install -o 0 -g 0 -m644 mullvad.repo /etc/yum.repos.d/mullvad.repo # [sudo]
   wget https://repository.mullvad.net/rpm/mullvad-keyring.asc
@@ -100,7 +102,6 @@ fi
 # @see https://github.com/coreos/rpm-ostree/issues/1978
 #
 if ! command -v opensnitchd &>/dev/null; then
-  cd ~/Downloads/
   wget https://github.com/evilsocket/opensnitch/releases/download/v1.6.2/opensnitch-1.6.2-1.x86_64.rpm
   wget https://github.com/evilsocket/opensnitch/releases/download/v1.6.4/opensnitch-ui-1.6.4-1.noarch.rpm
   rpm-ostree install --assumeyes --apply-live opensnitch-*.rpm
