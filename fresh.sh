@@ -52,10 +52,22 @@ fi
 # Now the user no longer needs to enter sudo several times while bootstrapping.
 # This makes the entire install from the time sudo is entered unattended.
 sudo -i -u root bash <<EOF
+
+# Enable timesync to ensure correct clock
+# 
+# @see https://github.com/twpayne/chezmoi/issues/3453
+#
 if ! systemctl is-enabled systemd-timesyncd; then
   systemctl enable systemd-timesyncd # [sudo]
   systemctl start systemd-timesyncd # [sudo]
 fi
+
+# Mullvad - freedom and privacy-focused VPN.
+#
+# @see https://mullvad.net/en/why-mullvad-vpn
+# @see https://mullvad.net/en/help/install-mullvad-app-linux#fedora
+# @see https://docs.fedoraproject.org/en-US/fedora-silverblue/troubleshooting/#_adding_external_package_repositories
+#
 if ! command -v mullvad &>/dev/null; then
   cd ~/Downloads/
   wget https://repository.mullvad.net/rpm/stable/mullvad.repo
@@ -65,6 +77,14 @@ if ! command -v mullvad &>/dev/null; then
   rpm-ostree install --assumeyes --apply-live mullvad-vpn
   systemctl enable mullvad-daemon # app available after reboot # [sudo]
 fi
+
+# OpenSnitch - GNU/Linux application firewall.
+#
+# @see https://github.com/evilsocket/opensnitch
+# @see https://github.com/evilsocket/opensnitch/wiki/Installation
+# @see https://github.com/evilsocket/opensnitch/releases
+# @see https://github.com/coreos/rpm-ostree/issues/1978
+#
 if ! command -v opensnitchd &>/dev/null; then
   cd ~/Downloads/
   wget https://github.com/evilsocket/opensnitch/releases/download/v1.6.2/opensnitch-1.6.2-1.x86_64.rpm
