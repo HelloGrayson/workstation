@@ -13,5 +13,6 @@
 ./.var/app/io.gitlab.news_flash.NewsFlash
 
 ./.gnupg
+./.ssh
 
 ./Pictures
