@@ -12,6 +12,10 @@ set -x
 #
 flatpak remote-add --user --if-not-exists flathub "https://dl.flathub.org/repo/flathub.flatpakrepo"
 
+# Passwords and Keys - Manage PGP and SSH keys.
+# @see https://flathub.org/apps/org.gnome.seahorse.Application
+flatpak install --user --assumeyes flathub org.gnome.seahorse.Application
+
 # Bitwarden - OSS secret storage as a service.
 # @see https://flathub.org/apps/com.bitwarden.desktop
 flatpak install --user --assumeyes flathub com.bitwarden.desktop
