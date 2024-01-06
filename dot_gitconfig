@@ -1,0 +1,8 @@
+[user]
+	signingkey = B793DD7B2138D9E5
+	name = @HelloGrayson
+	email = 263587+HelloGrayson@users.noreply.github.com
+[commit]
+	gpgsign = true
+[gpg]
+	program = gpg2
