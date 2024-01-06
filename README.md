@@ -1,7 +1,6 @@
 # workstation 
 
-Automatically setup @HelloGrayson's Fedora Silverblue machine by running:
-
+Provision my Fedora Silverblue machine in a single command:
 ```console
 sh -c "$(curl -fsLSk https://raw.githubusercontent.com/HelloGrayson/workstation/main/install.sh)"
 ```
