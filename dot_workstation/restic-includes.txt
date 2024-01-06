@@ -3,6 +3,7 @@
 ./.local/share/backgrounds
 ./.local/share/fonts
 ./.local/share/applications
+./.local/share/keyrings
 ./.config/mimeapps.list
 
 ./AppImages/.icons
@@ -10,5 +11,7 @@
 ./.var/app/io.freetubeapp.FreeTube
 ./.var/app/io.gitlab.librewolf-community
 ./.var/app/io.gitlab.news_flash.NewsFlash
+
+./.gnupg
 
 ./Pictures
