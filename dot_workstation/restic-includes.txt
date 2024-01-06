@@ -1,5 +1,4 @@
 ./.workstation/dconf.ini
-./.workstation/restic-latest
 
 ./.local/share/backgrounds
 ./.local/share/fonts
