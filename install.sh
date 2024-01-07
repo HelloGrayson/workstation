@@ -15,7 +15,7 @@ main() {
 	# configure root os with a single sudo
 	sudo bash <<EOF
 set -xeuo pipefail
-sudo configure_root_os
+configure_root_os
 EOF
 
 	run_chezmoi
