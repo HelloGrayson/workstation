@@ -62,16 +62,16 @@ configure_root_os() {
 	#
 	# @see https://brandonrozek.com/blog/non-root-systemd-scripts/
 	#
-	loginctl enable-linger "$USER" # [sudo]
-	loginctl show-user "$USER"     # [sudo]
+	sudo loginctl enable-linger "$USER" # [sudo]
+	sudo loginctl show-user "$USER"     # [sudo]
 
 	# Enable timesync to ensure correct clock
 	#
 	# @see https://github.com/twpayne/chezmoi/issues/3453
 	#
 	if ! systemctl is-enabled systemd-timesyncd; then
-		systemctl enable systemd-timesyncd # [sudo]
-		systemctl start systemd-timesyncd  # [sudo]
+		sudo systemctl enable systemd-timesyncd # [sudo]
+		sudo systemctl start systemd-timesyncd  # [sudo]
 	fi
 
 	# Mullvad - freedom and privacy-focused VPN.
@@ -82,11 +82,11 @@ configure_root_os() {
 	#
 	if ! command -v mullvad &>/dev/null; then
 		wget https://repository.mullvad.net/rpm/stable/mullvad.repo
-		install -o 0 -g 0 -m644 mullvad.repo /etc/yum.repos.d/mullvad.repo # [sudo]
+		sudo install -o 0 -g 0 -m644 mullvad.repo /etc/yum.repos.d/mullvad.repo # [sudo]
 		wget https://repository.mullvad.net/rpm/mullvad-keyring.asc
-		install -o 0 -g 0 -m644 mullvad-keyring.asc /etc/pki/rpm-gpg/mullvad-keyring.asc # [sudo]
+		sudo install -o 0 -g 0 -m644 mullvad-keyring.asc /etc/pki/rpm-gpg/mullvad-keyring.asc # [sudo]
 		rpm-ostree install --assumeyes --apply-live mullvad-vpn
-		systemctl enable mullvad-daemon # app available after reboot # [sudo]
+		sudo systemctl enable mullvad-daemon # app available after reboot # [sudo]
 	fi
 
 	# OpenSnitch - GNU/Linux application firewall.
@@ -100,7 +100,7 @@ configure_root_os() {
 		wget https://github.com/evilsocket/opensnitch/releases/download/v1.6.2/opensnitch-1.6.2-1.x86_64.rpm
 		wget https://github.com/evilsocket/opensnitch/releases/download/v1.6.4/opensnitch-ui-1.6.4-1.noarch.rpm
 		rpm-ostree install --assumeyes --apply-live opensnitch-*.rpm
-		systemctl enable opensnitch # app available after reboot # [sudo]
+		sudo systemctl enable opensnitch # app available after reboot # [sudo]
 	fi
 }
 
