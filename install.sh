@@ -11,13 +11,6 @@ main() {
 	require_silverblue
 	connect_to_bitwarden
 	configure_root_os
-
-	# configure root os with a single sudo
-	sudo bash <<EOF
-set -xeuo pipefail
-configure_root_os
-EOF
-
 	run_chezmoi
 	rpm-ostree upgrade
 }
@@ -57,51 +50,56 @@ connect_to_bitwarden() {
 # @see https://superuser.com/a/1385156
 configure_root_os() {
 	cd ~/Downloads || exit
+	sudo bash <<EOF
 
-	# Enable systemd user services to run on boot & when logged out.
-	#
-	# @see https://brandonrozek.com/blog/non-root-systemd-scripts/
-	#
-	loginctl enable-linger "$USER" # [sudo]
-	loginctl show-user "$USER"     # [sudo]
+set -xeuo pipefail
 
-	# Enable timesync to ensure correct clock
-	#
-	# @see https://github.com/twpayne/chezmoi/issues/3453
-	#
-	if ! systemctl is-enabled systemd-timesyncd; then
-		systemctl enable systemd-timesyncd # [sudo]
-		systemctl start systemd-timesyncd  # [sudo]
-	fi
+# Enable systemd user services to run on boot & when logged out.
+#
+# @see https://brandonrozek.com/blog/non-root-systemd-scripts/
+#
+loginctl enable-linger $USER # [sudo]
+loginctl show-user $USER # [sudo]
 
-	# Mullvad - freedom and privacy-focused VPN.
-	#
-	# @see https://mullvad.net/en/why-mullvad-vpn
-	# @see https://mullvad.net/en/help/install-mullvad-app-linux#fedora
-	# @see https://docs.fedoraproject.org/en-US/fedora-silverblue/troubleshooting/#_adding_external_package_repositories
-	#
-	if ! command -v mullvad &>/dev/null; then
-		wget https://repository.mullvad.net/rpm/stable/mullvad.repo
-		install -o 0 -g 0 -m644 mullvad.repo /etc/yum.repos.d/mullvad.repo # [sudo]
-		wget https://repository.mullvad.net/rpm/mullvad-keyring.asc
-		install -o 0 -g 0 -m644 mullvad-keyring.asc /etc/pki/rpm-gpg/mullvad-keyring.asc # [sudo]
-		rpm-ostree install --assumeyes --apply-live mullvad-vpn
-		systemctl enable mullvad-daemon # app available after reboot # [sudo]
-	fi
+# Enable timesync to ensure correct clock
+# 
+# @see https://github.com/twpayne/chezmoi/issues/3453
+#
+if ! systemctl is-enabled systemd-timesyncd; then
+  systemctl enable systemd-timesyncd # [sudo]
+  systemctl start systemd-timesyncd # [sudo]
+fi
 
-	# OpenSnitch - GNU/Linux application firewall.
-	#
-	# @see https://github.com/evilsocket/opensnitch
-	# @see https://github.com/evilsocket/opensnitch/wiki/Installation
-	# @see https://github.com/evilsocket/opensnitch/releases
-	# @see https://github.com/coreos/rpm-ostree/issues/1978
-	#
-	if ! command -v opensnitchd &>/dev/null; then
-		wget https://github.com/evilsocket/opensnitch/releases/download/v1.6.2/opensnitch-1.6.2-1.x86_64.rpm
-		wget https://github.com/evilsocket/opensnitch/releases/download/v1.6.4/opensnitch-ui-1.6.4-1.noarch.rpm
-		rpm-ostree install --assumeyes --apply-live opensnitch-*.rpm
-		systemctl enable opensnitch # app available after reboot # [sudo]
-	fi
+# Mullvad - freedom and privacy-focused VPN.
+#
+# @see https://mullvad.net/en/why-mullvad-vpn
+# @see https://mullvad.net/en/help/install-mullvad-app-linux#fedora
+# @see https://docs.fedoraproject.org/en-US/fedora-silverblue/troubleshooting/#_adding_external_package_repositories
+#
+if ! command -v mullvad &>/dev/null; then
+  wget https://repository.mullvad.net/rpm/stable/mullvad.repo
+  install -o 0 -g 0 -m644 mullvad.repo /etc/yum.repos.d/mullvad.repo # [sudo]
+  wget https://repository.mullvad.net/rpm/mullvad-keyring.asc
+  install -o 0 -g 0 -m644 mullvad-keyring.asc /etc/pki/rpm-gpg/mullvad-keyring.asc # [sudo]
+  rpm-ostree install --assumeyes --apply-live mullvad-vpn
+  systemctl enable mullvad-daemon # app available after reboot # [sudo]
+fi
+
+# OpenSnitch - GNU/Linux application firewall.
+#
+# @see https://github.com/evilsocket/opensnitch
+# @see https://github.com/evilsocket/opensnitch/wiki/Installation
+# @see https://github.com/evilsocket/opensnitch/releases
+# @see https://github.com/coreos/rpm-ostree/issues/1978
+#
+if ! command -v opensnitchd &>/dev/null; then
+  wget https://github.com/evilsocket/opensnitch/releases/download/v1.6.2/opensnitch-1.6.2-1.x86_64.rpm
+  wget https://github.com/evilsocket/opensnitch/releases/download/v1.6.4/opensnitch-ui-1.6.4-1.noarch.rpm
+  rpm-ostree install --assumeyes --apply-live opensnitch-*.rpm
+  systemctl enable opensnitch # app available after reboot # [sudo]
+fi
+
+EOF
 }
 
 # Apply this repo's Chezmoi scripts to machine.
