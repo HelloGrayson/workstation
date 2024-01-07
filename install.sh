@@ -58,8 +58,8 @@ set -xeuo pipefail
 #
 # @see https://brandonrozek.com/blog/non-root-systemd-scripts/
 #
-loginctl enable-linger $USER # [sudo]
-loginctl show-user $USER # [sudo]
+loginctl enable-linger "$USER" # [sudo]
+loginctl show-user "$USER" # [sudo]
 
 # Enable timesync to ensure correct clock
 # 
