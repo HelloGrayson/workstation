@@ -37,6 +37,10 @@ RUN sudo dnf -y install ripgrep
 # @see https://github.com/junegunn/fzf
 RUN sudo dnf -y install fzf
 
+# ShellCheck - warnings and suggestions for bash/sh shell scripts.
+# @see https://github.com/koalaman/shellcheck
+RUN sudo dnf -y install ShellCheck
+
 # lf (as in "list files") is a terminal file manager written in Go with a heavy inspiration from ranger file manager.
 # @see https://github.com/gokcehan/lf
 RUN sudo dnf -y install golang
