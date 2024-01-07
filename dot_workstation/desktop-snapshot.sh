@@ -24,7 +24,7 @@ cd $HOME
 source $WORKSTATION/restic-env
 
 # Backup all files matching restic-includes.txt
-restic backup --verbose --files-from=$WORKSTATION/restic-includes.txt
+restic backup --verbose --files-from=$WORKSTATION/restic-includes.txt --exclude-file=$WORKSTATION/restic-excludes.txt
 
 # Prune backups according to policy:
 #

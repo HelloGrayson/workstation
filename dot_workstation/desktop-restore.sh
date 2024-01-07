@@ -7,7 +7,7 @@ cd $HOME
 source $HOME/.workstation/restic-env
 
 # Restore latest snapshot directly into $HOME
-restic restore --verbose --exclude user-dirs.dirs --target $HOME latest
+restic restore --verbose --target $HOME latest
 
 # Restore dconf database
 dconf load -f / <$HOME/.workstation/dconf.ini
