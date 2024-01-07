@@ -8,14 +8,19 @@ set -o nounset  # abort on unbound variable
 set -o pipefail # don't hide errors within pipes
 
 main() {
-	if ! cat /etc/*-release | grep Silverblue || false; then
-		echo "Automation intended for Fedora Silverblue alone." 1>&2
-		exit 1
-	fi
+	require_silverblue
 	connect_to_bitwarden
 	configure_root_os
 	run_chezmoi
 	rpm-ostree upgrade
+}
+
+# Enforce that script is being ran on Fedora Silverblue
+require_silverblue() {
+	if ! cat /etc/*-release | grep Silverblue || false; then
+		echo "Automation intended for Fedora Silverblue alone." 1>&2
+		exit 1
+	fi
 }
 
 # Auth to Bitwarden once for all further subshells.
