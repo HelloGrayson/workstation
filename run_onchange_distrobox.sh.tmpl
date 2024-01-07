@@ -8,7 +8,7 @@ podman build -f {{ joinPath .chezmoi.sourceDir "dot_workstation/Containerfile.fe
 
 # Recreate Fedora distrobox.
 if distrobox ls | grep Fedora || false; then
-	distrobox stop -Y Fedora
+  podman kill Fedora
 	distrobox rm -Y Fedora
 fi
 SHELL=/usr/bin/zsh distrobox create --image localhost/fedora --name Fedora
