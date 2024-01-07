@@ -8,7 +8,7 @@ set -o nounset  # abort on unbound variable
 set -o pipefail # don't hide errors within pipes
 
 main() {
-	if ! lsb_release -d | grep Silverblue || false; then
+	if ! cat /etc/*-release | grep Silverblue || false; then
 		echo "Automation intended for Fedora Silverblue alone." 1>&2
 		exit 1
 	fi
