@@ -1,8 +1,8 @@
-#!/bin/sh
+#!/usr/bin/bash
 #
 # Fully provision a fresh machine in a single command:
 #
-# $ sh -c "$(curl -fsLS https://raw.githubusercontent.com/HelloGrayson/dotfiles/main/init.sh)"
+# $ bash -c "$(curl -fsLS https://raw.githubusercontent.com/HelloGrayson/workstation/main/install.sh)"
 #
 # This works by:
 # 1. Installing Bitwarden, login, and auth, setting $BW_SESSION.
@@ -10,54 +10,62 @@
 # 3. Download Chezmoi, download this repo, then provision system.
 # 4. Upgrade system packages, finalize install by rebooting.
 #
-# Cheers.
-#
 
-# Print all commands to terminal.
-#
-# @see https://www.baeldung.com/linux/set-command#4-the--x-option
-#
-set -x
+set -x          # print all commands to terminal
+set -o errexit  # abort on nonzero exitstatus
+set -o nounset  # abort on unbound variable
+set -o pipefail # don't hide errors within pipes
 
-# Establish Bitwarden access.
-#
-# Setting $BW_SESSION within a chezmoi script
-# does not actually grant every chezmoi script
-# access to Bitwarden since environmental variables
-# do not survive between shell sessions that Chezmoi 
-# is presumably creating for each script.
-#
-# On a fresh machine, we can call into init.sh first and 
-# then call into out Chezmoi program from it, making init.sh
-# the parent script and allowing $BW_SESSION to be available 
-# until the entire program concludes.
-#
-# In short, this means we can auth to Bitwarden once for the 
-# entire installation without needing to reauthenticate.
-#
-if ! command -v bw &>/dev/null; then
-  cd ~/Downloads/
-  wget --content-disposition "https://vault.bitwarden.com/download/?app=cli&platform=linux"
-  unzip -u bw-linux-*.zip
-  mkdir -p ~/bin
-  mv bw ~/bin/
-  chmod +x ~/bin/bw
-fi
-if ! bw login --check; then
-  export BW_SESSION=$(bw login --raw)
-fi
-if ! bw unlock --check; then
-  export BW_SESSION=$(bw unlock --raw)
-fi
+main() {
+	set_bw_session
+	do_sudo_work
+	run_chezmoi
+	rpm-ostree upgrade
+}
 
-# Perform sudo-required host provisioning. This approach 
-# allows many sudo-required commands to run while only prompting for a 
-# single sudo password; ideal for unattended and long-running installations.
-# 
-# @see https://superuser.com/a/1385156
-#
-cd ~/Downloads
-sudo bash <<EOF
+set_bw_session() {
+	# Establish Bitwarden access.
+	#
+	# Setting $BW_SESSION within a chezmoi script
+	# does not actually grant every chezmoi script
+	# access to Bitwarden since environmental variables
+	# do not survive between shell sessions that Chezmoi
+	# is presumably creating for each script.
+	#
+	# On a fresh machine, we can call into init.sh first and
+	# then call into out Chezmoi program from it, making init.sh
+	# the parent script and allowing $BW_SESSION to be available
+	# until the entire program concludes.
+	#
+	# In short, this means we can auth to Bitwarden once for the
+	# entire installation without needing to reauthenticate.
+	#
+	if ! command -v bw &>/dev/null; then
+		cd ~/Downloads/ || exit
+		wget --content-disposition "https://vault.bitwarden.com/download/?app=cli&platform=linux"
+		unzip -u bw-linux-*.zip
+		mkdir -p ~/bin
+		mv bw ~/bin/
+		chmod +x ~/bin/bw
+	fi
+	if ! bw login --check; then
+		BW_SESSION=$(bw login --raw)
+	fi
+	if ! bw unlock --check; then
+		BW_SESSION=$(bw unlock --raw)
+	fi
+	export BW_SESSION
+}
+
+do_sudo_work() {
+	# Perform sudo-required host provisioning. This approach
+	# allows many sudo-required commands to run while only prompting for a
+	# single sudo password; ideal for unattended and long-running installations.
+	#
+	# @see https://superuser.com/a/1385156
+	#
+	cd ~/Downloads || exit
+	sudo bash <<EOF
 
 # Show user all commands being executed.
 set -x
@@ -108,19 +116,14 @@ if ! command -v opensnitchd &>/dev/null; then
 fi
 
 EOF
+}
 
-# Download and run Chezmoi
-if ! command -v chezmoi &>/dev/null; then
-  cd $HOME
-  sh -c "$(curl -fsLSk get.chezmoi.io)"
-fi
-chezmoi init --apply --verbose HelloGrayson/workstation
+run_chezmoi() {
+	if ! command -v chezmoi &>/dev/null; then
+		cd "$HOME" || exit
+		sh -c "$(curl -fsLSk get.chezmoi.io)"
+	fi
+	chezmoi init --apply --verbose HelloGrayson/workstation
+}
 
-# Update system to latest packages,
-# taking advantage of following reboot
-rpm-ostree upgrade
-
-# Finalize installation by Rebooting
-# This is necessary for some components,
-# like Mullvad, opensnitch, and the Gnome AppIndicator extension.
-# reboot
+main "${@}"
