@@ -1,15 +1,6 @@
 #!/usr/bin/bash
 #
-# Fully provision a fresh machine in a single command:
-#
-# $ bash -c "$(curl -fsLS https://raw.githubusercontent.com/HelloGrayson/workstation/main/install.sh)"
-#
-# This works by:
-# 1. Installing Bitwarden, login, and auth, setting $BW_SESSION.
-# 2. Provision host using a sudo block for all root-level setup.
-# 3. Download Chezmoi, download this repo, then provision system.
-# 4. Upgrade system packages, finalize install by rebooting.
-#
+# Fully provision a fresh Fedora Silverblue.
 
 set -x          # print all commands to terminal
 set -o errexit  # abort on nonzero exitstatus
@@ -17,29 +8,14 @@ set -o nounset  # abort on unbound variable
 set -o pipefail # don't hide errors within pipes
 
 main() {
-	set_bw_session
-	do_sudo_work
+	connect_to_bitwarden
+	configure_root_os
 	run_chezmoi
 	rpm-ostree upgrade
 }
 
-set_bw_session() {
-	# Establish Bitwarden access.
-	#
-	# Setting $BW_SESSION within a chezmoi script
-	# does not actually grant every chezmoi script
-	# access to Bitwarden since environmental variables
-	# do not survive between shell sessions that Chezmoi
-	# is presumably creating for each script.
-	#
-	# On a fresh machine, we can call into init.sh first and
-	# then call into out Chezmoi program from it, making init.sh
-	# the parent script and allowing $BW_SESSION to be available
-	# until the entire program concludes.
-	#
-	# In short, this means we can auth to Bitwarden once for the
-	# entire installation without needing to reauthenticate.
-	#
+# Auth to Bitwarden once for all further subshells.
+connect_to_bitwarden() {
 	if ! command -v bw &>/dev/null; then
 		cd ~/Downloads/ || exit
 		wget --content-disposition "https://vault.bitwarden.com/download/?app=cli&platform=linux"
@@ -58,13 +34,12 @@ set_bw_session() {
 	fi
 }
 
-do_sudo_work() {
-	# Perform sudo-required host provisioning. This approach
-	# allows many sudo-required commands to run while only prompting for a
-	# single sudo password; ideal for unattended and long-running installations.
-	#
-	# @see https://superuser.com/a/1385156
-	#
+# Perform sudo-required host provisioning. This approach
+# allows many sudo-required commands to run while only prompting for a
+# single sudo password; ideal for unattended and long-running installations.
+#
+# @see https://superuser.com/a/1385156
+configure_root_os() {
 	cd ~/Downloads || exit
 	sudo bash <<EOF
 
@@ -118,6 +93,7 @@ fi
 EOF
 }
 
+# Apply this repo's Chezmoi scripts to machine.
 run_chezmoi() {
 	if ! command -v chezmoi &>/dev/null; then
 		cd "$HOME" || exit
