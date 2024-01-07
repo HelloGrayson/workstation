@@ -67,8 +67,7 @@ do_sudo_work() {
 	cd ~/Downloads || exit
 	sudo bash <<EOF
 
-# Show user all commands being executed.
-set -x
+set -xeuo pipefail
 
 # Enable systemd user services to run on boot & when logged out.
 #
