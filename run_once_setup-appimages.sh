@@ -1,5 +1,5 @@
-#!/bin/bash
-set -x
+#!/usr/bin/bash
+set -xeuo pipefail
 
 # Install AppImages into Gearlever.
 # .desktop synced via ~/.local/applications w/ chezmoi.

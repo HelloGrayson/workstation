@@ -1,5 +1,5 @@
-#!/bin/bash
-set -x
+#!/usr/bin/bash
+set -xeuo pipefail
 
 # Install preqequisites into a single rpm-ostree layer
 rpm-ostree install \

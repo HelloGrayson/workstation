@@ -1,5 +1,5 @@
-#!/bin/bash
-set -x
+#!/usr/bin/bash
+set -xeuo pipefail
 
 # So long as the user password manages the ~/.local/share/keyrings password,
 # Gnome will automatically unlock SSH and GPG keys.

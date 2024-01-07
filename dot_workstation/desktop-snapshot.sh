@@ -1,5 +1,5 @@
-#!/bin/bash
-set -x
+#!/usr/bin/bash
+set -xeuo pipefail
 
 WORKSTATION=$HOME/.workstation
 LEADER=$WORKSTATION/restic-leader

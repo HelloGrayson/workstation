@@ -1,5 +1,5 @@
-#!/bin/bash
-set -x
+#!/usr/bin/bash
+set -xeuo pipefail
 
 # Reload daemon to pick up all file changes
 systemctl --user daemon-reload
