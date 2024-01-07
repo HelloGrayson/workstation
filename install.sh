@@ -50,11 +50,12 @@ set_bw_session() {
 	fi
 	if ! bw login --check; then
 		BW_SESSION=$(bw login --raw)
+		export BW_SESSION
 	fi
 	if ! bw unlock --check; then
 		BW_SESSION=$(bw unlock --raw)
+		export BW_SESSION
 	fi
-	export BW_SESSION
 }
 
 do_sudo_work() {
