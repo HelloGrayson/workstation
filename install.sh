@@ -46,7 +46,7 @@ connect_to_bitwarden() {
 # Administer Silverblue host
 configure_root_os() {
 	sudo_block() {
-		cd /tmp || exit
+		cd ~/Downloads || exit
 
 		# Enable systemd user services to run on boot & when logged out.
 		#
@@ -98,7 +98,7 @@ configure_root_os() {
 	# single sudo password; ideal for unattended and long-running installations.
 	#
 	# @see https://superuser.com/a/1385156
-	sudo bash -c "set -xeuo pipefail; $(declare -f sudo_block); sudo_block"
+	sudo -u "$USER" bash -c "set -xeuo pipefail; $(declare -f sudo_block); sudo_block"
 }
 
 # Apply this repo's Chezmoi scripts to machine.
