@@ -7,9 +7,7 @@ set -xeuo pipefail
 podman build -f {{ joinPath .chezmoi.sourceDir "dot_workstation/Containerfile.fedora" | quote }} -t "localhost/fedora"
 
 # Recreate Fedora distrobox.
-exists=$(distrobox ls | grep Fedora)
-echo $exists
-if [[ ! -z $exists ]]; then
+if distrobox ls | grep Fedora || false; then
 	distrobox stop -Y Fedora
 	distrobox rm -Y Fedora
 fi
