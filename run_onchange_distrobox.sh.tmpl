@@ -3,12 +3,16 @@ set -xeuo pipefail
 
 # .workstation/Containerfile.fedora hash: {{ include "dot_workstation/Containerfile.fedora" | sha256sum }}
 
-# Update localhost/fedora container.
-podman build -f {{ joinPath .chezmoi.sourceDir "dot_workstation/Containerfile.fedora" | quote }} -t "localhost/fedora"
+main() {
+  # Update localhost/fedora container.
+  podman build -f {{ joinPath .chezmoi.sourceDir "dot_workstation/Containerfile.fedora" | quote }} -t "localhost/fedora"
 
-# Recreate Fedora distrobox.
-if distrobox ls | grep Fedora || false; then
-  podman kill Fedora
-	distrobox rm -Y Fedora
-fi
-SHELL=/usr/bin/zsh distrobox create --image localhost/fedora --name Fedora
+  # Recreate Fedora distrobox.
+  if distrobox ls | grep Fedora || false; then
+    podman kill Fedora
+    distrobox rm -Y Fedora
+  fi
+  SHELL=/usr/bin/zsh distrobox create --image localhost/fedora --name Fedora
+}
+
+main "${@}"
