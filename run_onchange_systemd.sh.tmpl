@@ -5,23 +5,14 @@ set -xeuo pipefail
 # .config/systemd/user/desktop-snapshot.timer hash: {{ include "dot_config/systemd/user/desktop-snapshot.timer" | sha256sum }}
 
 main() {
-  # Reload daemon to pick up all file changes
   systemctl --user daemon-reload
 
-  # Enable desktop-snapshot.service
-  if ! systemctl is-enabled --user desktop-snapshot.service; then
-    systemctl enable --user --now desktop-snapshot.service
-  fi
-  systemctl status --user desktop-snapshot.service --full --no-pager
+  systemctl enable --user desktop-snapshot.service
+  systemctl status --user desktop-snapshot.service --full --no-pager || true
 
-  # Enable desktop-snapshot.timer
-  if ! systemctl is-enabled --user desktop-snapshot.timer; then
-    systemctl enable --user --now desktop-snapshot.timer
-  fi
-  if ! systemctl is-active --user desktop-snapshot.timer; then
-    systemctl start --user desktop-snapshot.timer
-  fi
-  systemctl status --user desktop-snapshot.timer --full --no-pager
+  systemctl enable --user --now desktop-snapshot.timer
+  systemctl start --user desktop-snapshot.timer
+  systemctl status --user desktop-snapshot.timer --full --no-pager || true
 }
 
 main "${@}"

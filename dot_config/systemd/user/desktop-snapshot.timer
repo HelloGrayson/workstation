@@ -8,4 +8,4 @@ OnBootSec=10min
 OnCalendar=daily
 
 [Install]
-WantedBy=multiuser.target
+WantedBy=default.target
