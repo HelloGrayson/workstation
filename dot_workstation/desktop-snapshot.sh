@@ -1,30 +1,31 @@
 #!/usr/bin/bash
 set -xeuo pipefail
 
-WORKSTATION=$HOME/.workstation
-LEADER=$WORKSTATION/restic-leader
+WORKSTATION="$HOME/.workstation"
+LEADER="$WORKSTATION/restic-leader"
+MID=$(cat "/etc/machine-id")
 
 # Only allow snapshot from leader...
 # TODO create desktop-leader.sh which allows machine to set self as leader
 # this would solve the issue of migrating to a new machine for primary use.
-if [ $(cat /etc/machine-id) != $(head -1 $LEADER) ]; then
+if [ "$(cat "$MID")" != "$(head -1 "$LEADER")" ]; then
 	echo "Not leader; gracefully exiting..."
 	exit 0
 fi
 
 # Update dconf database
-DCONF=$WORKSTATION/dconf.ini
-rm -f $DCONF
-dconf dump / >$DCONF
+DCONF="$WORKSTATION/dconf.ini"
+rm -f "$DCONF"
+dconf dump / >"$DCONF"
 
 # Backup to Backblaze
-cd $HOME
+cd ~
 
 # Init credentials
-source $WORKSTATION/restic-env
+source "$WORKSTATION/restic-env"
 
 # Backup all files matching restic-includes.txt
-restic backup --verbose --files-from=$WORKSTATION/restic-includes.txt --exclude-file=$WORKSTATION/restic-excludes.txt
+restic backup --verbose --files-from="$WORKSTATION/restic-includes.txt" --exclude-file="$WORKSTATION/restic-excludes.txt"
 
 # Prune backups according to policy:
 #
@@ -42,18 +43,19 @@ restic stats
 
 # Store latest short_id in restic-latest
 LATEST=$(restic snapshots --json | jq .[-1].short_id -r)
-TRACKER=$WORKSTATION/restic-latest
-rm -f $TRACKER
-echo $LATEST >>$TRACKER
-chezmoi add $TRACKER
+TRACKER="$WORKSTATION/restic-latest"
+rm -f "$TRACKER"
+echo "$LATEST" >>"$TRACKER"
+chezmoi add "$TRACKER"
 
 # Recreate leader file to
 # track which machine did snapshot
-MID=$(cat /etc/machine-id)
 HOST=$(fastfetch | grep "Host: ")
 OS=$(fastfetch | grep "OS: ")
-rm -f $LEADER
-echo $MID >>$LEADER
-echo $HOST >>$LEADER
-echo $OS >>$LEADER
-chezmoi add $LEADER
+rm -f "$LEADER"
+{
+	echo "$MID"
+	echo "$HOST"
+	echo "$OS"
+} >>"$LEADER"
+chezmoi add "$LEADER"
