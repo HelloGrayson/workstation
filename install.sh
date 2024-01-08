@@ -83,8 +83,8 @@ fi
 #
 # @see https://discussion.fedoraproject.org/t/logrotate-failed-on-boot/65783/2
 #
-sudo restorecon -r -v /var/log
-sudo systemctl restart logrotate.service
+#sudo restorecon -r -v /var/log
+#sudo systemctl restart logrotate.service
 
 # Mullvad - freedom and privacy-focused VPN.
 #
