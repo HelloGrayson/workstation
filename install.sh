@@ -79,6 +79,13 @@ if ! systemctl is-enabled systemd-timesyncd; then
   systemctl start systemd-timesyncd # [sudo]
 fi
 
+# Fix lograte failing on boot.
+#
+# @see https://discussion.fedoraproject.org/t/logrotate-failed-on-boot/65783/2
+#
+sudo restorecon -r -v /var/log
+sudo systemctl restart logrotate.service
+
 # Mullvad - freedom and privacy-focused VPN.
 #
 # @see https://mullvad.net/en/why-mullvad-vpn
