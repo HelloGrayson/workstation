@@ -6,13 +6,12 @@ set -xeuo pipefail
 
 main() {
   systemctl --user daemon-reload
-
-  systemctl enable --user desktop-snapshot.service
-  systemctl status --user desktop-snapshot.service --full --no-pager || true
-
+  
   systemctl enable --user --now desktop-snapshot.timer
   systemctl start --user desktop-snapshot.timer
   systemctl status --user desktop-snapshot.timer --full --no-pager || true
+
+  systemctl status --user desktop-snapshot.service --full --no-pager || true
 }
 
 main "${@}"
