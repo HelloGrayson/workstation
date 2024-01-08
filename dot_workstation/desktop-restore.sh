@@ -5,7 +5,9 @@ main() {
 	cd ~
 
 	# Connect to Backblaze
+	set +x
 	source ~/.workstation/restic-env
+	set -x
 
 	# Restore latest snapshot directly into $HOME
 	restic restore --verbose --target "$HOME" latest
