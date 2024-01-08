@@ -13,6 +13,10 @@ RUN sudo dnf -y install tmux
 # @see https://git-scm.com/
 RUN sudo dnf -y install git
 
+# jq is a command-line JSON processor
+# @see https://github.com/jqlang/jq
+RUN sudo dnf -y install jq
+
 # htop is a cross-platform interactive process viewer.
 # @see https://github.com/htop-dev/htop
 RUN sudo dnf -y install htop
@@ -41,10 +45,10 @@ RUN sudo dnf -y install fzf
 # @see https://github.com/koalaman/shellcheck
 RUN sudo dnf -y install ShellCheck
 
-# lf (as in "list files") is a terminal file manager written in Go with a heavy inspiration from ranger file manager.
-# @see https://github.com/gokcehan/lf
-RUN sudo dnf -y install golang
-RUN env CGO_ENABLED=0 go install -ldflags="-s -w" github.com/gokcehan/lf@latest
+# ranger is a console file manager with VI key bindings.
+# @see https://github.com/ranger/ranger
+RUN sudo dnf -y install ranger
+RUN sudo dnf -y install file
 
 # zoxide is a smarter cd command, inspired by z and autojump.
 # @see https://github.com/ajeetdsouza/zoxide
