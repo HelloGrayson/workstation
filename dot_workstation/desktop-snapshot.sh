@@ -7,8 +7,6 @@ main() {
 	MID=$(cat "/etc/machine-id")
 
 	# Only allow snapshot from leader...
-	# TODO create desktop-leader.sh which allows machine to set self as leader
-	# this would solve the issue of migrating to a new machine for primary use.
 	if [ "$MID" != "$(head -1 "$LEADER")" ]; then
 		echo "Not leader; gracefully exiting..."
 		exit 0
