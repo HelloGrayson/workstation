@@ -9,16 +9,25 @@ set -o pipefail # don't hide errors within pipes
 
 main() {
 	require_silverblue
+	ensure_host_not_busy
 	connect_to_bitwarden
 	configure_root_os
 	run_chezmoi
 	rpm-ostree upgrade
 }
 
-# Enforce that script is being ran on Fedora Silverblue
+# Enforce that script is being ran on Fedora Silverblue.
 require_silverblue() {
 	if ! cat /etc/*-release | grep Silverblue || false; then
 		echo "Automation intended for Fedora Silverblue alone." 1>&2
+		exit 1
+	fi
+}
+
+# Ensure that rpm-ostree isn't in the middle of a transaction.
+ensure_host_not_busy() {
+	if ! rpm-ostree status | grep "State: idle" || false; then
+		echo "Silverblue has a running transaction; try again after." 1>&6.2
 		exit 1
 	fi
 }
