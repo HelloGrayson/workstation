@@ -7,4 +7,4 @@ RemainAfterExit=yes
 ExecStart=bash /var/home/emerald/.workstation/desktop-snapshot.sh -v 2>&1 | logger
 
 [Install]
-WantedBy=default.target
+WantedBy=multiuser.target
