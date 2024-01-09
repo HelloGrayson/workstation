@@ -5,7 +5,7 @@ main() {
 	# Install preqequisites into a single rpm-ostree layer
 	rpm-ostree install \
 		--assumeyes --apply-live --idempotent \
-		fastfetch distrobox restic
+		fastfetch distrobox
 
 	# Gnome Extension: Appindicator Support - KDE systray for Gnome.
 	#
