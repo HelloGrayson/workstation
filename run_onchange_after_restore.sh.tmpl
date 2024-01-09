@@ -1,15 +1,12 @@
 #!/usr/bin/bash
 set -xeuo pipefail
 
-# .workstation/restic-latest hash: {{ include "dot_workstation/restic-latest" | sha256sum }}
+# .workstation/restic-latest hash: {{ include "src/restic-latest" | sha256sum }}
 
 main() {
-  # Restore current machine if not the last one who performed a snapshot.
-  LEADER=$(head -1 {{ joinPath .chezmoi.sourceDir "dot_workstation/restic-leader" | quote }})
-  THIS=$(cat /etc/machine-id)
-  if [ "$THIS" != "$LEADER" ]; then 
-    bash {{ joinPath .chezmoi.sourceDir "dot_workstation/desktop-restore.sh" | quote }}
-  fi
+	SRC="$(chezmoi data | jq .chezmoi.sourceDir -r)/src"
+
+  bash "$SRC/desktop-restore.sh"
 }
 
 main "${@}"

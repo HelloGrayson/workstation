@@ -3,8 +3,9 @@
 set -xeuo pipefail
 
 main() {
-	WORKSTATION="$HOME/.workstation"
-	LEADER="$WORKSTATION/restic-leader"
+	SRC="$(chezmoi data | jq .chezmoi.sourceDir -r)/src"
+
+	LEADER="$SRC/restic-leader"
 	MID=$(cat "/etc/machine-id")
 
 	HOST=$(fastfetch | grep "Host: ")

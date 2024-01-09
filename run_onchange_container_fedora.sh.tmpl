@@ -1,11 +1,13 @@
 #!/usr/bin/bash
 set -xeuo pipefail
 
-# .workstation/Containerfile.fedora hash: {{ include "dot_workstation/Containerfile.fedora" | sha256sum }}
+# src/Containerfile.fedora hash: {{ include "src/Containerfile.fedora" | sha256sum }}
 
 main() {
+  SRC="$(chezmoi data | jq .chezmoi.sourceDir -r)/src"
+
   # Update localhost/fedora container.
-  podman build -f {{ joinPath .chezmoi.sourceDir "dot_workstation/Containerfile.fedora" | quote }} -t "localhost/fedora"
+  podman build -f "$SRC/Containerfile.fedora"  -t "localhost/fedora"
 
   # Recreate Fedora distrobox.
   if distrobox ls | grep Fedora || false; then

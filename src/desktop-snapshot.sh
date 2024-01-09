@@ -2,8 +2,10 @@
 set -xeuo pipefail
 
 main() {
-	WORKSTATION="$HOME/.workstation"
-	LEADER="$WORKSTATION/restic-leader"
+	SRC="$(chezmoi data | jq .chezmoi.sourceDir -r)/src"
+	SNAPSHOT="$HOME/.restic"
+
+	LEADER="$SRC/restic-leader"
 	MID=$(cat "/etc/machine-id")
 
 	# Only allow snapshot from leader...
@@ -13,7 +15,7 @@ main() {
 	fi
 
 	# Update dconf database
-	DCONF="$WORKSTATION/dconf.ini"
+	DCONF="$SNAPSHOT/dconf.ini"
 	rm -f "$DCONF"
 	dconf dump / >"$DCONF"
 
@@ -21,7 +23,7 @@ main() {
 	cd ~
 
 	# Backup all files matching restic-includes.txt
-	restic backup --verbose --files-from="$WORKSTATION/restic-includes.txt" --exclude-file="$WORKSTATION/restic-excludes.txt"
+	restic backup --verbose --files-from="$SRC/restic-includes.txt" --exclude-file="$SRC/restic-excludes.txt"
 
 	# Prune backups according to policy:
 	#
@@ -39,7 +41,7 @@ main() {
 
 	# Store latest short_id in restic-latest
 	LATEST=$(restic snapshots --json | jq .[-1].short_id -r)
-	TRACKER="$WORKSTATION/restic-latest"
+	TRACKER="$SRC/restic-latest"
 	rm -f "$TRACKER"
 	echo "$LATEST" >>"$TRACKER"
 	chezmoi add "$TRACKER"
