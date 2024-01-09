@@ -2,10 +2,10 @@
 set -xeuo pipefail
 
 main() {
-	SRC="$(chezmoi data | jq .chezmoi.sourceDir -r)/src"
+	WORKINGDIR="$(chezmoi data | jq .chezmoi.sourceDir -r)/src/backup"
 
 	# Build bin-restic container
-	podman build -f "$SRC/Containerfile.bin-restic" -t "localhost/bin-restic"
+	podman build -f "$WORKINGDIR/Containerfile.bin-restic" -t "localhost/bin-restic"
 
 	# Recreate bin-restic distrobox
 	if distrobox ls | grep bin-restic || false; then

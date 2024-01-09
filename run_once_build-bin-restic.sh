@@ -2,9 +2,9 @@
 set -xeuo pipefail
 
 main() {
-	SRC="$(chezmoi data | jq .chezmoi.sourceDir -r)/src"
+	WORKINGDIR="$(chezmoi data | jq .chezmoi.sourceDir -r)/src/backup"
 
-	bash "$SRC/build-bin-restic.sh"
+	bash "$WORKINGDIR/build-bin-restic.sh"
 }
 
 main "${@}"

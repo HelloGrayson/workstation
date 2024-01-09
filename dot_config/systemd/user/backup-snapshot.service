@@ -1,0 +1,10 @@
+[Unit]
+Description=Periodic Backup Snapshot
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=bash "$(chezmoi data | jq .chezmoi.sourceDir -r)/src/backup/snapshot.sh" -v 2>&1 | logger
+
+[Install]
+WantedBy=default.target

@@ -2,10 +2,10 @@
 set -xeuo pipefail
 
 main() {
-	SRC="$(chezmoi data | jq .chezmoi.sourceDir -r)/src"
+	WORKINGDIR="$(chezmoi data | jq .chezmoi.sourceDir -r)/src/backup"
 	SNAPSHOT="$HOME/.restic"
 
-	LEADER="$SRC/restic-leader"
+	LEADER="$WORKINGDIR/restic-leader"
 	MID=$(cat "/etc/machine-id")
 
 	# Only allow snapshot from leader...
@@ -23,7 +23,7 @@ main() {
 	cd ~
 
 	# Backup all files matching restic-includes.txt
-	restic backup --verbose --files-from="$SRC/restic-includes.txt" --exclude-file="$SRC/restic-excludes.txt"
+	restic backup --verbose --files-from="$WORKINGDIR/includes.txt" --exclude-file="$WORKINGDIR/excludes.txt"
 
 	# Prune backups according to policy:
 	#
@@ -41,7 +41,7 @@ main() {
 
 	# Store latest short_id in restic-latest
 	LATEST=$(restic snapshots --json | jq .[-1].short_id -r)
-	TRACKER="$SRC/restic-latest"
+	TRACKER="$WORKINGDIR/restic-latest"
 	rm -f "$TRACKER"
 	echo "$LATEST" >>"$TRACKER"
 	chezmoi add "$TRACKER"

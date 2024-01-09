@@ -2,11 +2,11 @@
 set -xeuo pipefail
 
 main() {
-	SRC="$(chezmoi data | jq .chezmoi.sourceDir -r)/src"
+	WORKINGDIR="$(chezmoi data | jq .chezmoi.sourceDir -r)/src/backup"
 	SNAPSHOT="$HOME/.restic"
 
 	# Exit early if this machine is the one doing the snapshotting
-	LEADER=$(head -1 "$SRC/restic-leader")
+	LEADER=$(head -1 "$WORKINGDIR/restic-leader")
 	THIS=$(cat /etc/machine-id)
 	if [ "$THIS" == "$LEADER" ]; then
 		echo "Not the leader; gracefully exiting..."

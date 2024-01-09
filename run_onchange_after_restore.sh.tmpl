@@ -1,12 +1,12 @@
 #!/usr/bin/bash
 set -xeuo pipefail
 
-# .workstation/restic-latest hash: {{ include "src/restic-latest" | sha256sum }}
+# restic-latest hash: {{ include "src/backup/restic-latest" | sha256sum }}
 
 main() {
-	SRC="$(chezmoi data | jq .chezmoi.sourceDir -r)/src"
+	WORKINGDIR="$(chezmoi data | jq .chezmoi.sourceDir -r)/src/backup"
 
-  bash "$SRC/desktop-restore.sh"
+  bash "$WORKINGDIR/restore.sh"
 }
 
 main "${@}"

@@ -1,18 +1,13 @@
 #!/usr/bin/bash
 set -xeuo pipefail
 
-# .config/systemd/user/desktop-snapshot.service hash: {{ include "dot_config/systemd/user/desktop-snapshot.service" | sha256sum }}
-# .config/systemd/user/desktop-snapshot.timer hash: {{ include "dot_config/systemd/user/desktop-snapshot.timer" | sha256sum }}
+# backup-snapshot.service hash: {{ include "dot_config/systemd/user/backup-snapshot.service" | sha256sum }}
+# backup-snapshot.timer hash: {{ include "dot_config/systemd/user/backup-snapshot.timer" | sha256sum }}
 
 main() {
-  systemctl --user daemon-reload
-  
-  systemctl status --user desktop-snapshot.service --full --no-pager || true
+  WORKINGDIR="$(chezmoi data | jq .chezmoi.sourceDir -r)/src/backup"
 
-  systemctl enable --user --now desktop-snapshot.timer
-  systemctl start --user desktop-snapshot.timer
-  systemctl status --user desktop-snapshot.timer --full --no-pager || true
-  systemctl list-timers --user --all
+  bash "$WORKINGDIR/init-systemd.sh"
 }
 
 main "${@}"

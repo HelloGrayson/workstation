@@ -1,12 +1,12 @@
 #!/usr/bin/bash
 set -xeuo pipefail
 
-# src/Containerfile.env-fedora hash: {{ include "src/Containerfile.env-fedora" | sha256sum }}
+# Containerfile.env-fedora hash: {{ include "src/env-fedora/Containerfile.env-fedora" | sha256sum }}
 
 main() {
-  SRC="$(chezmoi data | jq .chezmoi.sourceDir -r)/src"
+  WORKINGDIR="$(chezmoi data | jq .chezmoi.sourceDir -r)/src/env-fedora"
 
-  bash "$SRC/build-env-fedora.sh"
+  bash "$WORKINGDIR/build-env-fedora.sh"
 }
 
 main "${@}"

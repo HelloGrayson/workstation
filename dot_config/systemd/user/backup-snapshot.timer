@@ -1,0 +1,11 @@
+[Unit]
+Description=Timer for backup-snapshot.service
+Requires=backup-snapshot.service
+
+[Timer]
+Unit=backup-snapshot.service
+OnBootSec=10min
+OnCalendar=daily
+
+[Install]
+WantedBy=default.target
