@@ -6,7 +6,7 @@ main() {
 
 	# Connect to Backblaze
 	set +x
-	source ~/.workstation/restic-env
+	source "$WORKSTATION/restic-export-creds.sh"
 	set -x
 
 	# Restore latest snapshot directly into $HOME

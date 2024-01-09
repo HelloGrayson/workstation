@@ -22,7 +22,7 @@ main() {
 
 	# Init credentials
 	set +x
-	source "$WORKSTATION/restic-env"
+	source "$WORKSTATION/restic-export-creds.sh"
 	set -x
 
 	# Backup all files matching restic-includes.txt
