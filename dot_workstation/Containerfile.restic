@@ -1,3 +1,4 @@
+# distrobox create --image fedora:latest --name bin-restic -a "--env-file ~/.workstation/restic.env"
 FROM alpine:latest
 RUN sudo apk add restic
 RUN distrobox-export --bin $(which restic) --export-path ~/bin

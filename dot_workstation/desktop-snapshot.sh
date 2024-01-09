@@ -20,11 +20,6 @@ main() {
 	# Backup to Backblaze
 	cd ~
 
-	# Init credentials
-	set +x
-	source "$WORKSTATION/restic-export-creds.sh"
-	set -x
-
 	# Backup all files matching restic-includes.txt
 	restic backup --verbose --files-from="$WORKSTATION/restic-includes.txt" --exclude-file="$WORKSTATION/restic-excludes.txt"
 
