@@ -17,8 +17,6 @@ main() {
 		echo "$HOST"
 		echo "$OS"
 	} >>"$LEADER"
-
-	chezmoi add "$LEADER"
 }
 
 main "${@}"
