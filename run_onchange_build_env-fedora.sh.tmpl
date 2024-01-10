@@ -4,7 +4,7 @@ set -xeuo pipefail
 # Containerfile.env-fedora hash: {{ include "src/env-fedora/Containerfile.env-fedora" | sha256sum }}
 
 main() {
-  WORKINGDIR="$HOME/Source/HelloGrayson/workstation/src/backup"
+  WORKINGDIR="$HOME/Source/HelloGrayson/workstation/src/env-fedora"
 
   bash "$WORKINGDIR/build-env-fedora.sh"
 }
