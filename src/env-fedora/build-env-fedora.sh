@@ -2,7 +2,7 @@
 set -xeuo pipefail
 
 main() {
-	WORKINGDIR="$(chezmoi data | jq .chezmoi.sourceDir -r)/src/env-fedora"
+	WORKINGDIR="$HOME/.local/share/chezmoi/src/env-fedora"
 
 	# Update localhost/fedora container.
 	podman build -f "$WORKINGDIR/Containerfile.env-fedora" -t "localhost/env-fedora"

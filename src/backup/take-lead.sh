@@ -3,7 +3,7 @@
 set -xeuo pipefail
 
 main() {
-	WORKINGDIR="$(chezmoi data | jq .chezmoi.sourceDir -r)/src/backup"
+	WORKINGDIR="$HOME/.local/share/chezmoi/src/backup"
 
 	LEADER="$WORKINGDIR/restic-leader"
 	MID=$(cat "/etc/machine-id")

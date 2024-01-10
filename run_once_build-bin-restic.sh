@@ -2,7 +2,7 @@
 set -xeuo pipefail
 
 main() {
-	WORKINGDIR="$(chezmoi data | jq .chezmoi.sourceDir -r)/src/backup"
+	WORKINGDIR="$HOME/.local/share/chezmoi/src/backup"
 
 	bash "$WORKINGDIR/build-bin-restic.sh"
 }

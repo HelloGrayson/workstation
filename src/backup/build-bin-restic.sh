@@ -2,7 +2,7 @@
 set -xeuo pipefail
 
 main() {
-	WORKINGDIR="$(chezmoi data | jq .chezmoi.sourceDir -r)/src/backup"
+	WORKINGDIR="$HOME/.local/share/chezmoi/src/backup"
 
 	# Build bin-restic container
 	podman build -f "$WORKINGDIR/Containerfile.bin-restic" -t "localhost/bin-restic"

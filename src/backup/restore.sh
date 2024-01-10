@@ -2,7 +2,7 @@
 set -xeuo pipefail
 
 main() {
-	WORKINGDIR="$(chezmoi data | jq .chezmoi.sourceDir -r)/src/backup"
+	WORKINGDIR="$HOME/.local/share/chezmoi/src/backup"
 	SNAPSHOT="$HOME/.restic"
 
 	# Exit early if this machine is the one doing the snapshotting

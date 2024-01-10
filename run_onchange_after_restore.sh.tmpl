@@ -4,7 +4,7 @@ set -xeuo pipefail
 # restic-latest hash: {{ include "src/backup/restic-latest" | sha256sum }}
 
 main() {
-	WORKINGDIR="$(chezmoi data | jq .chezmoi.sourceDir -r)/src/backup"
+	WORKINGDIR="$HOME/.local/share/chezmoi/src/backup"
 
   bash "$WORKINGDIR/restore.sh"
 }
