@@ -4,7 +4,7 @@ Description=Periodic Backup Snapshot
 [Service]
 Type=oneshot
 RemainAfterExit=yes
-ExecStart=bash -c '"$(chezmoi data | jq .chezmoi.sourceDir -r)/src/backup/snapshot.sh" -v 2>&1 | logger'
+ExecStart=bash -c '"$HOME/.local/share/chezmoi/src/backup/snapshot.sh" -v 2>&1 | logger'
 
 [Install]
 WantedBy=default.target
