@@ -124,7 +124,7 @@ run_chezmoi() {
 		cd "$HOME" || exit
 		BINDIR="$HOME/.local/bin" sh -c "$(curl -fsLSk get.chezmoi.io)"
 	fi
-	chezmoi init --apply --verbose HelloGrayson/workstation
+	chezmoi init --apply --verbose HelloGrayson/workstation --source "$HOME/Source/HelloGrayson/workstation"
 }
 
 main "${@}"

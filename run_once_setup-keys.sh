@@ -2,6 +2,7 @@
 set -xeuo pipefail
 
 main() {
+	WORKINGDIR="$HOME/Source/HelloGrayson/workstation"
 
 	# So long as the user password manages the ~/.local/share/keyrings password,
 	# Gnome will automatically unlock SSH and GPG keys.
@@ -21,7 +22,7 @@ main() {
 
 	# Enable commit access to local Chezmoi repo
 	# (HTTPS was the default to enable provisioning w/o SSH key)
-	cd ~/.local/share/chezmoi/
+	cd $WORKSTATION
 	SSHREPO=git@github.com:HelloGrayson/workstation.git
 	git remote set-url origin $SSHREPO
 	git remote set-url --push origin $SSHREPO

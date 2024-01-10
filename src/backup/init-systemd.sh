@@ -8,7 +8,6 @@ main() {
 
 	systemctl enable --user --now backup-snapshot.timer
 	systemctl start --user backup-snapshot.timer
-
 	systemctl status --user backup-snapshot.timer --full --no-pager || true
 	systemctl list-timers --user --all --no-pager
 }

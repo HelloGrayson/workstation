@@ -5,7 +5,7 @@ set -xeuo pipefail
 # backup-snapshot.timer hash: {{ include "dot_config/systemd/user/backup-snapshot.timer" | sha256sum }}
 
 main() {
-  WORKINGDIR="$HOME/.local/share/chezmoi/src/backup"
+  WORKINGDIR="$HOME/Source/HelloGrayson/workstation/src/backup"
 
   bash "$WORKINGDIR/init-systemd.sh"
 }

@@ -4,7 +4,7 @@ set -xeuo pipefail
 # restic-latest hash: {{ include "src/backup/restic-latest" | sha256sum }}
 
 main() {
-	WORKINGDIR="$HOME/.local/share/chezmoi/src/backup"
+  WORKINGDIR="$HOME/Source/HelloGrayson/workstation/src/backup"
 
   bash "$WORKINGDIR/restore.sh"
 }

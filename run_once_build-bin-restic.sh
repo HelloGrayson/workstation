@@ -2,7 +2,7 @@
 set -xeuo pipefail
 
 main() {
-	WORKINGDIR="$HOME/.local/share/chezmoi/src/backup"
+	WORKINGDIR="$HOME/Source/HelloGrayson/workstation/src/backup"
 
 	bash "$WORKINGDIR/build-bin-restic.sh"
 }
