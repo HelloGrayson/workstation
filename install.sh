@@ -121,7 +121,7 @@ EOF
 # Apply this repo's Chezmoi scripts to machine.
 run_chezmoi() {
 	mkdir -p ~/.config/chezmoi/
-	echo 'sourceDir = "Source/HelloGrayson/workstation"' >>"$HOME/.config/chezmoi/chezmoi.toml"
+	echo 'sourceDir = "~/Source/HelloGrayson/workstation"' >>"$HOME/.config/chezmoi/chezmoi.toml"
 
 	if ! command -v chezmoi &>/dev/null; then
 		cd "$HOME" || exit
