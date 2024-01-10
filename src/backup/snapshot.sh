@@ -23,7 +23,7 @@ main() {
 	cd ~
 
 	# Backup all files matching restic-includes.txt
-	restic backup --verbose --files-from="$WORKINGDIR/includes.txt" --exclude-file="$WORKINGDIR/excludes.txt"
+	restic backup --verbose --files-from="$WORKINGDIR/restic-includes.txt" --exclude-file="$WORKINGDIR/restic-excludes.txt"
 
 	# Prune backups according to policy:
 	#
@@ -44,7 +44,6 @@ main() {
 	TRACKER="$WORKINGDIR/restic-latest"
 	rm -f "$TRACKER"
 	echo "$LATEST" >>"$TRACKER"
-	chezmoi add "$TRACKER"
 
 	# Recreate leader file to
 	# track which machine did snapshot
@@ -56,7 +55,6 @@ main() {
 		echo "$HOST"
 		echo "$OS"
 	} >>"$LEADER"
-	chezmoi add "$LEADER"
 }
 
 main "${@}"
