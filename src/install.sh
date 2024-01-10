@@ -27,7 +27,7 @@ require_silverblue() {
 # Ensure that rpm-ostree isn't in the middle of a transaction.
 ensure_host_not_busy() {
 	if ! rpm-ostree status | grep "State: idle" || false; then
-		echo "Silverblue has a running transaction; try again after." 1>&6.2
+		echo "Silverblue has a running transaction; try again after." 1>&2
 		exit 1
 	fi
 }
