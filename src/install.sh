@@ -120,7 +120,7 @@ EOF
 
 # Apply this repo's Chezmoi scripts to machine.
 run_chezmoi() {
-	WORKSTATION = "$HOME/Source/HelloGrayson/workstation"
+	WORKSTATION="$HOME/Source/HelloGrayson/workstation"
 
 	mkdir -p ~/.config/chezmoi/
 	echo 'sourceDir = "$WORKSTATION"' >>"$HOME/.config/chezmoi/chezmoi.toml"
