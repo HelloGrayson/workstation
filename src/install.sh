@@ -122,7 +122,7 @@ EOF
 run_chezmoi() {
 	if ! command -v chezmoi &>/dev/null; then
 		cd "$HOME" || exit
-		sh -c "$(curl -fsLSk get.chezmoi.io)"
+		BINDIR="$HOME/.local/bin" sh -c "$(curl -fsLSk get.chezmoi.io)"
 	fi
 	chezmoi init --apply --verbose HelloGrayson/workstation
 }
