@@ -38,9 +38,9 @@ connect_to_bitwarden() {
 		cd ~/Downloads/ || exit
 		wget --content-disposition "https://vault.bitwarden.com/download/?app=cli&platform=linux"
 		unzip -u bw-linux-*.zip
-		mkdir -p ~/bin
-		mv bw ~/bin/
-		chmod +x ~/bin/bw
+		mkdir -p ~/.local/bin
+		mv bw ~/.local/bin/
+		chmod +x ~/.local/bin/bw
 	fi
 	if ! bw login --check; then
 		BW_SESSION=$(bw login --raw)

@@ -17,7 +17,7 @@ main() {
 
 	# Reexport restic binary to user
 	rm -f ~/bin/restic
-	distrobox enter bin-restic -- distrobox-export --bin /usr/bin/restic --export-path ~/bin
+	distrobox enter bin-restic -- distrobox-export --bin /usr/bin/restic --export-path ~/.local/bin
 }
 
 main "${@}"
