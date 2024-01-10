@@ -4,7 +4,7 @@ Description=Periodic Backup Snapshot
 [Service]
 Type=oneshot
 RemainAfterExit=yes
-ExecStart=bash -c '"$HOME/Source/HelloGrayson/workstation/src/backup/snapshot.sh" -v 2>&1 | logger'
+ExecStart=bash -c '"$HOME/Source/HelloGrayson/workstation/backup/snapshot.sh" -v 2>&1 | logger'
 
 [Install]
 WantedBy=default.target

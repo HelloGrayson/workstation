@@ -3,7 +3,7 @@
 set -xeuo pipefail
 
 main() {
-	WORKINGDIR="$HOME/Source/HelloGrayson/workstation/src/backup"
+	WORKINGDIR="$HOME/Source/HelloGrayson/workstation/backup"
 
 	LEADER="$WORKINGDIR/restic-leader"
 	MID=$(cat "/etc/machine-id")

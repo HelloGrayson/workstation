@@ -2,7 +2,7 @@
 set -xeuo pipefail
 
 main() {
-	WORKINGDIR="$HOME/Source/HelloGrayson/workstation/src/env-fedora"
+	WORKINGDIR="$HOME/Source/HelloGrayson/workstation/env-fedora"
 
 	# Update localhost/fedora container.
 	podman build -f "$WORKINGDIR/Containerfile.env-fedora" -t "localhost/env-fedora"

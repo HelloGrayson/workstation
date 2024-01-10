@@ -2,7 +2,7 @@
 set -xeuo pipefail
 
 main() {
-	WORKINGDIR="$HOME/Source/HelloGrayson/workstation/src/backup"
+	WORKINGDIR="$HOME/Source/HelloGrayson/workstation/backup"
 
 	# Exit early if this machine is the one doing the snapshotting
 	LEADER=$(head -1 "$WORKINGDIR/restic-leader")

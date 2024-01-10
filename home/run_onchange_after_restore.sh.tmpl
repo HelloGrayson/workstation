@@ -1,0 +1,12 @@
+#!/usr/bin/bash
+set -xeuo pipefail
+
+# restic-latest hash: {{ include "../backup/restic-latest" | sha256sum }}
+
+main() {
+  WORKINGDIR="$HOME/Source/HelloGrayson/workstation/backup"
+
+  bash "$WORKINGDIR/restore.sh"
+}
+
+main "${@}"

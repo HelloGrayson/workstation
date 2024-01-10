@@ -22,7 +22,7 @@ main() {
 
 	# Enable commit access to local Chezmoi repo
 	# (HTTPS was the default to enable provisioning w/o SSH key)
-	cd $WORKSTATION
+	cd $WORKINGDIR
 	SSHREPO=git@github.com:HelloGrayson/workstation.git
 	git remote set-url origin $SSHREPO
 	git remote set-url --push origin $SSHREPO

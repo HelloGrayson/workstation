@@ -1,0 +1,12 @@
+#!/usr/bin/bash
+set -xeuo pipefail
+
+# Containerfile.env-fedora hash: {{ include "../env-fedora/Containerfile.env-fedora" | sha256sum }}
+
+main() {
+  WORKINGDIR="$HOME/Source/HelloGrayson/workstation/env-fedora"
+
+  bash "$WORKINGDIR/build-env-fedora.sh"
+}
+
+main "${@}"

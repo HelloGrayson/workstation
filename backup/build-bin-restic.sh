@@ -2,7 +2,7 @@
 set -xeuo pipefail
 
 main() {
-	WORKINGDIR="$HOME/Source/HelloGrayson/workstation/src/backup"
+	WORKINGDIR="$HOME/Source/HelloGrayson/workstation/backup"
 
 	# Build bin-restic container
 	podman build -f "$WORKINGDIR/Containerfile.bin-restic" -t "localhost/bin-restic"
