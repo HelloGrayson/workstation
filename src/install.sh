@@ -120,17 +120,16 @@ EOF
 
 # Apply this repo's Chezmoi scripts to machine.
 run_chezmoi() {
-	WORKSTATION="$HOME/Source/HelloGrayson/workstation"
-
 	mkdir -p ~/.config/chezmoi/
-	echo 'sourceDir = "$WORKSTATION"' >>"$HOME/.config/chezmoi/chezmoi.toml"
+	echo 'sourceDir = "$HOME/Source/HelloGrayson/workstation"' >>"$HOME/.config/chezmoi/chezmoi.toml"
 
 	if ! command -v chezmoi &>/dev/null; then
 		cd "$HOME" || exit
 		BINDIR="$HOME/.local/bin" sh -c "$(curl -fsLSk get.chezmoi.io)"
 	fi
 
-	chezmoi init --apply --verbose HelloGrayson/workstation --source "$WORKSTATION"
+	chezmoi init --apply --verbose HelloGrayson/workstation \
+		--source "$HOME/Source/HelloGrayson/workstation"
 }
 
 main "${@}"
