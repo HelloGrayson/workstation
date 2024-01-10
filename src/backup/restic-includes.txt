@@ -1,4 +1,4 @@
-./.restic/dconf.ini
+./.dconf.ini
 
 ./.local/share/backgrounds
 ./.local/share/fonts

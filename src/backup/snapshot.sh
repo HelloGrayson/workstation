@@ -3,7 +3,6 @@ set -xeuo pipefail
 
 main() {
 	WORKINGDIR="$HOME/.local/share/chezmoi/src/backup"
-	SNAPSHOT="$HOME/.restic"
 
 	LEADER="$WORKINGDIR/restic-leader"
 	MID=$(cat "/etc/machine-id")
@@ -15,7 +14,7 @@ main() {
 	fi
 
 	# Update dconf database
-	DCONF="$SNAPSHOT/dconf.ini"
+	DCONF="$HOME/.dconf.ini"
 	rm -f "$DCONF"
 	dconf dump / >"$DCONF"
 

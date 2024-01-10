@@ -3,7 +3,6 @@ set -xeuo pipefail
 
 main() {
 	WORKINGDIR="$HOME/.local/share/chezmoi/src/backup"
-	SNAPSHOT="$HOME/.restic"
 
 	# Exit early if this machine is the one doing the snapshotting
 	LEADER=$(head -1 "$WORKINGDIR/restic-leader")
@@ -20,7 +19,7 @@ main() {
 	restic restore --verbose --target "$HOME" latest
 
 	# Restore dconf database
-	dconf load -f / <"$SNAPSHOT/dconf.ini"
+	dconf load -f / <"$HOME/.dconf.ini"
 }
 
 main "${@}"

@@ -12,7 +12,7 @@ main() {
 		podman kill bin-restic
 		distrobox rm -Y bin-restic
 	fi
-	distrobox create --image localhost/bin-restic --name bin-restic -a "--env-file ~/.restic/restic.env"
+	distrobox create --image localhost/bin-restic --name bin-restic -a "--env-file ~/.restic.env"
 	distrobox enter bin-restic -- restic version
 
 	# Reexport restic binary to user
