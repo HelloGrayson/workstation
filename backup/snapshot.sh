@@ -22,7 +22,7 @@ main() {
 	cd ~
 
 	# Backup all files matching restic-includes.txt
-	restic backup --verbose --files-from="$WORKINGDIR/restic-includes.txt" --exclude-file="$WORKINGDIR/restic-excludes.txt"
+	restic backup --verbose --host="emerald-silverblue" --files-from="$WORKINGDIR/restic-includes.txt" --exclude-file="$WORKINGDIR/restic-excludes.txt"
 
 	# Prune backups according to policy:
 	#
