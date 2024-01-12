@@ -68,6 +68,10 @@ main() {
 	# Telegram Desktop -  Use Telegram on Linux.
 	# @see https://flathub.org/apps/org.telegram.desktop
 	flatpak install --user --assumeyes flathub org.telegram.desktop
+
+	# Discord - messaging, voice, and video for groups and communities.
+	# @see https://flathub.org/apps/com.discordapp.Discord
+	flatpak install --user --assumeyes flathub com.discordapp.Discord
 }
 
 main "${@}"
