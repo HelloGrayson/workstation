@@ -72,6 +72,10 @@ main() {
 	# Discord - messaging, voice, and video for groups and communities.
 	# @see https://flathub.org/apps/com.discordapp.Discord
 	flatpak install --user --assumeyes flathub com.discordapp.Discord
+
+	# Signal - E2EE encrypted messaging for IRL contacts.
+	# @see https://flathub.org/apps/org.signal.Signal
+	flatpak install --user --assumeyes flathub org.signal.Signal
 }
 
 main "${@}"
